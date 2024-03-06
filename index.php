@@ -30,8 +30,10 @@ if (!isset($pageNumber)) {
 
     $conn = connectToDb();
 
-    $result = $conn->query("SELECT id, kurztitle FROM buecher WHERE ID > " . $pageNumber * 18 .
-        " AND ID <= " . ($pageNumber * 18 + $booksPerPage));
+    $result = $conn->query("SELECT id, kurztitle FROM buecher WHERE id > " . $pageNumber * 18 .
+        " AND id <= " . ($pageNumber * 18 + $booksPerPage));
+    echo $pageNumber . "<br>";
+    echo $booksPerPage . "<br>";
 
     foreach ($result->fetch_all() as $value) {
         echo "<a href='/books?id=" . $value[$idIndex] . "'>" .
