@@ -1,7 +1,18 @@
+<?php
+
+include "server/mysqlInterface.php";
+$pageNumber = $_GET["page"];
+if (!isset($pageNumber)) {
+    $pageNumber = 0; // first page
+}
+
+?>
+
 <html>
 
 <head>
     <link href="index.css" rel="stylesheet">
+    <title><?= "Index - Page " . ($pageNumber + 1) ?></title>
 </head>
 
 <body>
@@ -12,12 +23,6 @@
 
     <?php
 
-    include "server/mysqlInterface.php";
-    $pageNumber = $_GET["page"];
-    if (!isset($pageNumber)) {
-        $pageNumber = 0; // first page
-    }
-
     $idIndex = 0;
     $kurzTitleIndex = 1;
 
@@ -26,7 +31,7 @@
     $conn = connectToDb();
 
     $result = $conn->query("SELECT id, kurztitle FROM buecher WHERE ID > " . $pageNumber * 18 .
-        " AND ID <= " . $pageNumber * 18 + $booksPerPage);
+        " AND ID <= " . ($pageNumber * 18 + $booksPerPage));
 
     foreach ($result->fetch_all() as $value) {
         echo "<a href='/books?id=" . $value[$idIndex] . "'>" .
@@ -43,7 +48,7 @@
         $rowCount = $result->fetch_row();
 
         for ($i = 0; $i < ($rowCount[0] / $booksPerPage); $i++) {
-            echo "<a href='?page=" . $i . "'> " . $i + 1 . " </a>";
+            echo "<a href='?page=" . $i . "'> " . ($i + 1) . " </a>";
         }
 
         ?>
