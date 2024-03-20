@@ -16,6 +16,7 @@ if (!isset($pageNumber)) {
 </head>
 
 <body>
+<?php include "components/header.php"; ?>
 
     <div>
         test
