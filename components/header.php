@@ -1,3 +1,3 @@
 <div id="header_container"> 
-  <img src="../assets/logo.png"
+  <a href="/"><img src="../assets/logo.png"></a>
 </div>
