@@ -37,7 +37,7 @@ span {
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.3);
   border-radius: 3px;
   height: 8px;
-  background: #fff;
+  background: #878787;
   transition: all .3s;
   position: relative;
 }
@@ -171,21 +171,23 @@ $(document).ready(function() {
 </script>
 
 <body>
-  <div id="header_container"> 
+ 
+  <div id="header_container">
+
+    <div class="placeholder">
+      <p></p>
+    </div> 
+
     <div class="logo inline">
       <a href="/"><img src="../assets/logo.png"></a>
     </div>
-
-
 
     <div class="btn not-active inline">
       <span></span>
       <span></span>
       <span></span>
     </div>
- 
-
-
 
   </div>
+
 </body>

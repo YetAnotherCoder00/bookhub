@@ -12,19 +12,57 @@ if (!isset($sortBy)) {
 
 ?>
 
-<html>
 
+
+
+<html>
 <head>
-    <link href="index.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://kit.fontawesome.com/fb438f2369.js" crossorigin="anonymous"></script>
     <title><?= "Index - Page " . ($pageNumber + 1) ?></title>
 </head>
 
 <body>
 <?php include "components/header.php"; ?>
 
-    <div>
-        test
+  <div class=search_container>
+
+    <div class="searchbar">
+      <p>hallo</p>
+      <form class="searchform">
+        <input class="searchfield" type="text" placeholder="search..." name="search">
+        <button id="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
     </div>
+
+    <div class="advancedsearch">
+      <button>Filters</button>
+      <button>Sort by <i class="fa-solid fa-chevron-down"></i></button>
+    </div>
+
+  </div>
+
+  <div class="filter_container">
+  </div>
+
+  <div class="slider_container">
+    <div class="slider_imageframe">
+      <a href="[buchseite]" id="slider_imagelink">
+      <img src="[bild]" id=slider_image>
+      </a>
+    </div>
+    <div class="slider_radiobuttons">
+      <input class="sliderradio" name="slider" type="radio" onclick="changeImage(1)" checked="checked">
+      <input class="sliderradio" name="slider" type="radio" onclick="changeImage(2)">
+      <input class="sliderradio" name="slider" type="radio" onclick="changeImage(3)">
+    </div>
+  </div>
+
+
+
+
+
+
 
     <?php
 
@@ -41,7 +79,7 @@ if (!isset($sortBy)) {
         sortieren:
         <ul>
             <?php
-            echo "<li><a href='/?page=" . $pageNumber . "'>clear</a></li>";
+            echo "<li><a href='/?page=" . $pageNumber  . "'>clear</a></li>";
             echo "<li><a href='/?page=" . $pageNumber  . "&sortBy=id'>id (default)</a></li>";
             echo "<li><a href='/?page=" . $pageNumber  . "&sortBy=katalog'>katalog</a></li>";
             echo "<li><a href='/?page=" . $pageNumber  . "&sortBy=nummer'>nummer</a></li>";
@@ -89,3 +127,4 @@ if (!isset($sortBy)) {
 </body>
 
 </html>
+
