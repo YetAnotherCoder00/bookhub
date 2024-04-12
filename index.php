@@ -25,14 +25,15 @@ if (!isset($sortBy)) {
 <body>
 <?php include "components/header.php"; ?>
 
-  <div class=search_container>
+  <div class="content">
+  <div class="search_container">
 
     <div class="searchbar"> 
       <form class="search_form">
         <input class="searchfield" type="text" placeholder="search..." name="search">
         <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
-    </div>
+    </div> 
 
     <div class="advancedsearch">
       <form class="advancedsearch_form">
@@ -45,6 +46,7 @@ if (!isset($sortBy)) {
     </div>
 
   </div>
+  </div>
 
   <div class="filter_container">
   </div>
@@ -52,7 +54,7 @@ if (!isset($sortBy)) {
   <div class="slider_container">
     <div class="slider_imageframe">
       <a href="[buchseite]" id="slider_imagelink">
-      <img src="[bild]" id=slider_image>
+      <img src="[binbr> <br>l]" id=slider_image>
       </a>
     </div>
     <div class="slider_radiobuttons">
