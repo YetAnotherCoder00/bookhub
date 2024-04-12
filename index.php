@@ -37,8 +37,8 @@ else {
 
     <div class="searchbar"> 
       <form class="search_form">
+          <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         <input class="searchfield" type="text" placeholder="search..." name="search" />
-        <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div> 
 

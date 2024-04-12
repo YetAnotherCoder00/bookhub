@@ -9,7 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0, auto;
+  margin: 0 auto;
 }
 
 .advancedsearch {
@@ -34,7 +34,7 @@ body {
 }
 
 .searchfield {
-  width: 60%;
+  width: 100%;
   font-size: 1.5vw;
   background-color: #1C1D36;
   border: solid 0px #1C1D36;
