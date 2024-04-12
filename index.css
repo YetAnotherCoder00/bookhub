@@ -55,9 +55,82 @@ body {
 }
 
 .slider_container{
-  width: 70%;
+  width: 50%;
   display: flex;
   align-items: center;
-  margin: 10vw auto;
+  margin: 3vw auto;
   flex-direction: column;
+  border: solid 0.1vw #B34CD5;
+  border-radius: 2vw;
+  padding: 1vw;
 }
+
+.slider_content {
+  display: flex;
+  flex-direction: row;
+}
+
+.slider_imageframe {
+  width: 40%;
+}
+
+.slider_textfield {
+  margin-left: 1vw;
+  width: 60%;
+}
+
+.slider_price {
+  text-align: right;
+}
+
+#slider_image {
+  width: 100%;
+  border-radius: 1vw;
+}
+
+h1 {
+  font-size: 3vw;
+}
+
+h2 {
+  font-size: 2vw;
+}
+
+p {
+  font-size: 1vw;
+}
+
+.book_container {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  margin: 3vw auto;
+  flex-direction: column;
+  border: solid 0.1vw #B34CD5;
+  border-radius: 2vw;
+  padding: 1vw;
+}
+
+.book_content {
+  display: flex;
+  flex-direction: row;
+}
+
+.book_imageframe {
+  width: 40%;
+}
+
+.book_textfield {
+  margin-left: 1vw;
+  width: 60%;
+}
+
+.book_price {
+  text-align: right;
+}
+
+.book_image {
+  width: 100%;
+  border-radius: 1vw;
+}
+

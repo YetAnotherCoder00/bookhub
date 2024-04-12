@@ -51,11 +51,25 @@ else {
   </div>
 
   <div class="slider_container">
-    <div class="slider_imageframe">
-      <a href="[buchseite]" id="slider_imagelink">
-      <img src="[binbr> <br>l]" id=slider_image>
-      </a>
+
+    <div class="slider_content">
+
+      <div class="slider_imageframe">
+        <a href="[buchseite]" id="slider_imagelink">
+        <img src="assets/cover1.jpg" id=slider_image>
+        </a>
+      </div>
+
+      <div class="slider_textfield">
+        <h2>name</h2> <br>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gub           ergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos            et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        </p>
+          <br><br><br><br><br><br>
+        <h1 class="slider_price">35.00</h1>
+      </div>
+
     </div>
+
     <div class="slider_radiobuttons">
       <input class="sliderradio" name="slider" type="radio" onclick="changeImage(1)" checked="checked">
       <input class="sliderradio" name="slider" type="radio" onclick="changeImage(2)">
