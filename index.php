@@ -36,7 +36,7 @@ else {
   <div class="search_container">
 
     <div class="searchbar"> 
-      <form class="search_form">
+      <form action="search/index.php" method="get" class="search_form">
           <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         <input class="searchfield" type="text" placeholder="search..." name="search" />
       </form>
