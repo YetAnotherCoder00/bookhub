@@ -104,7 +104,7 @@ p {
   width: 50%;
   display: flex;
   align-items: center;
-  margin: 3vw auto;
+  margin: 5vw auto;
   flex-direction: column;
   border: solid 0.1vw #60A0E9;
   border-radius: 2vw;

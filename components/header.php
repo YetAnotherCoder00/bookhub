@@ -35,7 +35,7 @@ span {
   display: block;
   width: 100%;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.3);
-  border-radius: 3px;<img href="">
+  border-radius: 3px;
   height: 8px;
   background: #878787;
   transition: all .3s;

@@ -15,12 +15,25 @@ $search = $_GET["search"] ?? "";
 
 <html>
 <head>
-
+  <link rel="stylesheet" href="../index.css">
 </head>
 
 <body>
 
-<div class="advancedsearch">
+<?php include "../components/header.php"; ?>
+
+<div class="search_container">
+
+ <div class="searchbar"> 
+      <form "index.php" method="get" class="search_form">
+        <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input class="searchfield" type="text" placeholder="search..." name="search" />
+      </form>
+    </div> 
+
+
+
+  <div class="advancedsearch">
     <form action="/search/index.php" method="get" class="advancedsearch_form">
         <select name="sortBy" onchange="this.form.submit()">
             <option value="" disabled selected>Sort by <i class="fa-solid fa-chevron-down"></i></option>
@@ -43,6 +56,8 @@ $search = $_GET["search"] ?? "";
             ?>
         </select>
     </form>
+</div>
+
     <?php
 
     $idIndex = 0;
@@ -89,5 +104,8 @@ $search = $_GET["search"] ?? "";
         ?>
     </div>
 </div>
+
+<?php include "../components/footer.php"; ?>
+
 </body>
 </html>

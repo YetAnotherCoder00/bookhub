@@ -60,6 +60,8 @@ $bookInfo = $result->fetch_row();
         echo $bookInfo[$descriptionIndex];
     ?>
 
+  <?php include "../components/footer.php"; ?>
+
 
 </body>
 
