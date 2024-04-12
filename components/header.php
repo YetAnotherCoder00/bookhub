@@ -1,7 +1,7 @@
 <style>
 #header_container { 
   background-color:#1C1D36;
-  max-height:8.5vh ;
+  max-height: 8.5vh;
 }
 
 .logo {
@@ -35,7 +35,7 @@ span {
   display: block;
   width: 100%;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.3);
-  border-radius: 3px;
+  border-radius: 3px;<img href="">
   height: 8px;
   background: #878787;
   transition: all .3s;

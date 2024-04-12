@@ -60,7 +60,7 @@ body {
   align-items: center;
   margin: 3vw auto;
   flex-direction: column;
-  border: solid 0.1vw #B34CD5;
+  border: solid 0.1vw #60A0E9;
   border-radius: 2vw;
   padding: 1vw;
 }
@@ -106,7 +106,7 @@ p {
   align-items: center;
   margin: 3vw auto;
   flex-direction: column;
-  border: solid 0.1vw #B34CD5;
+  border: solid 0.1vw #60A0E9;
   border-radius: 2vw;
   padding: 1vw;
 }

@@ -32,7 +32,7 @@ else {
 <body>
 <?php include "components/header.php"; ?>
 
-  <div class="content">
+  <div class="content" id="top">
   <div class="search_container">
 
     <div class="searchbar"> 
@@ -125,6 +125,10 @@ else {
 
         ?>
     </div>
+
+  <?php
+    include "components/footer.php";
+  ?>
 
 </body>
 
