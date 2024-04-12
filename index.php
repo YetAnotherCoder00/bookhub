@@ -2,25 +2,29 @@
 
 include "server/mysqlInterface.php";
 
-if (!isset($pageNumber)) {
-    $pageNumber = 0; // first page
+if (isset($_GET["page"])) {
+    $pageNumber = htmlspecialchars($_GET["page"]);
 }
 else {
-    $pageNumber = $_GET["page"];
+    $pageNumber = 0;
 }
 
-if (!isset($sortBy)) {
+if (isset($_GET["sortBy"])) {
+    $sortBy = htmlspecialchars($_GET["sortBy"]);
+}
+else {
     $sortBy = "id";
 }
-else {
-    $sortBy = $_GET["sortBy"];
-}
 
+
+$idIndex = 0;
+$kurzTitleIndex = 1;
+
+$booksPerPage = 18;
+
+$conn = connectToDb();
 
 ?>
-
-
-
 
 <html>
 <head>
@@ -77,36 +81,24 @@ else {
     </div>
   </div>
 
-
-
-
-
-
-
-    <?php
-
-    $idIndex = 0;
-    $kurzTitleIndex = 1;
-
-
-
-    $booksPerPage = 18;
-
-    $conn = connectToDb();
-?>
-
     <div>
         test
     </div>
     <div class="mainDiv">
     <?php
-        $result = $conn->query("SELECT id, kurztitle FROM buecher ORDER BY " . $sortBy . " LIMIT " . $pageNumber * 18 . ", " . $booksPerPage);
+        $result = $conn->query("SELECT COUNT(id) FROM buecher");
+        $pageCount = $result->fetch_row();
+        $pageCount = $pageCount[0] / $booksPerPage ?? 0;
+
+        $result = $conn->query("SELECT id, kurztitle FROM buecher ORDER BY " .
+            $sortBy . " LIMIT " . $pageNumber * 18 . ", " . $booksPerPage);
+
 
         foreach ($result->fetch_all() as $value) {
             echo "<div class='bookDiv'>";
             echo "<a href='/books?id=" . $value[$idIndex] . "'>" .
                 $value[$idIndex] . ": " . $value[$kurzTitleIndex] . "
-                </a>" . "<br> <br>";
+                    </a>" . "<br> <br>";
             echo "</div>";
         }
 
@@ -116,13 +108,59 @@ else {
     <div>
         <?php
 
-        $result = $conn->query("SELECT COUNT(*) FROM buecher");
-        $rowCount = $result->fetch_row();
+        $tmp = [];
 
-        for ($i = 0; $i < ($rowCount[0] / $booksPerPage); $i++) {
-            echo "<a href='?page=" . $i . "&sortBy=" . $sortBy . "'> " . ($i + 1) . " </a>";
+        echo "<div>";
+
+        for ($i = 0; $i < ($pageCount); $i++) {
+            if ($i == $pageNumber) {
+                $tmp[] = "<b>" . $pageNumber + 1 . "</b>";
+            }
+            else {
+                $tmp[] = "<a href='?page=" . $i . "'> " . ($i + 1) . " </a>";
+            }
         }
 
+        for ($i = count($tmp) - 3; $i > 2; $i--) {
+            // echo $i . ": " . abs($pageNumber - $i - 1) . "<br>";
+            if (abs($pageNumber - $i - 1) > 2) {
+                unset($tmp[$i]);
+            }
+        }
+
+        // echo "<a href='?page=" . $i . $linkBuilder . "'> " . ($i + 1) . " </a>";
+        echo "</div>";
+
+        if(count($tmp) > 1) {
+            echo "<p>";
+
+            if($pageNumber > 1) {
+                // display 'Prev' link
+                echo "<a href=\"?page=" . ($pageNumber - 1) . "\">&laquo; Prev</a> | ";
+            } else {
+                echo "Page ";
+            }
+
+            $lastlink = 0;
+            foreach($tmp as $i => $link) {
+                if($i > $lastlink + 1) {
+                    echo " ... "; // where one or more links have been omitted
+                } elseif($i) {
+                    echo " | ";
+                }
+                echo $link;
+                $lastlink = $i;
+            }
+
+            if($pageNumber <= $lastlink) {
+                // display 'Next' link
+                echo " | <a href=\"?page=" . ($pageNumber + 1) . "\">Next &raquo;</a>";
+            }
+
+            echo "</p>\n\n";
+        }
+
+        ?>
         ?>
     </div>
 
