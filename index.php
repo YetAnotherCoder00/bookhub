@@ -28,22 +28,13 @@ if (!isset($sortBy)) {
   <div class="content">
   <div class="search_container">
 
-    <div class="searchbar"> 
+    <div class="searchdiv"> 
       <form class="search_form">
-        <input class="searchfield" type="text" placeholder="search..." name="search">
         <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input class="searchfield" type="text" placeholder="search..." name="search"/>
       </form>
     </div> 
 
-    <div class="advancedsearch">
-      <form class="advancedsearch_form">
-        <select name="" class="" onchange="this.form.submit()">
-          <option value="" disabled selected>Sort by <i class="fa-solid fa-chevron-down"></i></option>
-          <option value=""></option>
-        </select>
-      </form>
-      <button class="activateFilters">Filters</button>
-    </div>
 
   </div>
   </div>

@@ -1,11 +1,11 @@
 <style>
 #header_container { 
   background-color:#1C1D36;
-  max-height:10vh ;
+  max-height:8.5vh ;
 }
 
 .logo {
-  padding-top: 2vh;
+  padding-top: 1.5vh;
 }
 
 
@@ -25,7 +25,7 @@ body {
 
 
 .btn {
-  padding-top: 8vh;
+  padding-top: 6vh;
   transform: translate(-50%, -50%);
   width: 80px;
   cursor: pointer;
