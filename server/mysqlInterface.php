@@ -2,7 +2,7 @@
 
 function connectToDb()
 {
-    $servername = "172.17.0.1";
+    $servername = "localhost";
     $username = "root";
     $password = "root";
     $database = "book";

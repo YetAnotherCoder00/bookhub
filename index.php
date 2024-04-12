@@ -24,6 +24,17 @@ $booksPerPage = 18;
 
 $conn = connectToDb();
 
+// book 1 = 1, book 2 = 999, book 3 = 712
+$books = [];
+$result = $conn->query("SELECT kurztitle, title, price FROM buecher WHERE id = 1");
+$bookInfo1 = $result->fetch_row();
+
+$result = $conn->query("SELECT kurztitle, title, price FROM buecher WHERE id = 999");
+$bookInfo2 = $result->fetch_row();
+
+$result = $conn->query("SELECT kurztitle, title, price FROM buecher WHERE id = 712");
+$bookInfo3 = $result->fetch_row();
+
 ?>
 
 <html>
@@ -51,118 +62,55 @@ $conn = connectToDb();
   </div>
   </div>
 
-  <div class="filter_container">
-  </div>
+<div class="book_container">
+    <div class="book_content">
 
-  <div class="slider_container">
+        <div class="book_imageframe">
+            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
+        </div>
 
-    <div class="slider_content">
-
-      <div class="slider_imageframe">
-        <a href="[buchseite]" id="slider_imagelink">
-        <img src="assets/cover1.jpg" id=slider_image>
-        </a>
-      </div>
-
-      <div class="slider_textfield">
-        <h2>name</h2> <br>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gub           ergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos            et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
-          <br><br><br><br><br><br>
-        <h1 class="slider_price">35.00</h1>
-      </div>
+        <div class="book_textfield">
+            <h2><?= $bookInfo1[0] ?></h2>
+            <p><?= $bookInfo1[1] ?> </p>
+            <br><br><br><br><br><br>
+            <h1 class="book_price"><?= floatval($bookInfo1[2]) / 100 ?></h1>
+        </div>
 
     </div>
+</div>
+<div class="book_container">
+    <div class="book_content">
 
-    <div class="slider_radiobuttons">
-      <input class="sliderradio" name="slider" type="radio" onclick="changeImage(1)" checked="checked">
-      <input class="sliderradio" name="slider" type="radio" onclick="changeImage(2)">
-      <input class="sliderradio" name="slider" type="radio" onclick="changeImage(3)">
+        <div class="book_imageframe">
+            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
+        </div>
+
+        <div class="book_textfield">
+            <h2><?= $bookInfo2[0] ?></h2>
+            <p><?= $bookInfo2[1] ?> </p>
+            <br><br><br><br><br><br>
+            <h1 class="book_price"><?= floatval($bookInfo2[2]) / 100 ?></h1>
+        </div>
+
     </div>
-  </div>
+</div>
+<div class="book_container">
+    <div class="book_content">
 
-    <div>
-        test
+        <div class="book_imageframe">
+            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
+        </div>
+
+        <div class="book_textfield">
+            <h2><?= $bookInfo3[0] ?></h2>
+            <p><?= $bookInfo3[1] ?> </p>
+            <br><br><br><br><br><br>
+            <h1 class="book_price"><?= floatval($bookInfo3[2]) / 100 ?></h1>
+        </div>
+
     </div>
-    <div class="mainDiv">
-    <?php
-        $result = $conn->query("SELECT COUNT(id) FROM buecher");
-        $pageCount = $result->fetch_row();
-        $pageCount = $pageCount[0] / $booksPerPage ?? 0;
+</div>
 
-        $result = $conn->query("SELECT id, kurztitle FROM buecher ORDER BY " .
-            $sortBy . " LIMIT " . $pageNumber * 18 . ", " . $booksPerPage);
-
-
-        foreach ($result->fetch_all() as $value) {
-            echo "<div class='bookDiv'>";
-            echo "<a href='/books?id=" . $value[$idIndex] . "'>" .
-                $value[$idIndex] . ": " . $value[$kurzTitleIndex] . "
-                    </a>" . "<br> <br>";
-            echo "</div>";
-        }
-
-        ?>
-    </div>
-
-    <div>
-        <?php
-
-        $tmp = [];
-
-        echo "<div>";
-
-        for ($i = 0; $i < ($pageCount); $i++) {
-            if ($i == $pageNumber) {
-                $tmp[] = "<b>" . $pageNumber + 1 . "</b>";
-            }
-            else {
-                $tmp[] = "<a href='?page=" . $i . "'> " . ($i + 1) . " </a>";
-            }
-        }
-
-        for ($i = count($tmp) - 3; $i > 2; $i--) {
-            // echo $i . ": " . abs($pageNumber - $i - 1) . "<br>";
-            if (abs($pageNumber - $i - 1) > 2) {
-                unset($tmp[$i]);
-            }
-        }
-
-        // echo "<a href='?page=" . $i . $linkBuilder . "'> " . ($i + 1) . " </a>";
-        echo "</div>";
-
-        if(count($tmp) > 1) {
-            echo "<p>";
-
-            if($pageNumber > 1) {
-                // display 'Prev' link
-                echo "<a href=\"?page=" . ($pageNumber - 1) . "\">&laquo; Prev</a> | ";
-            } else {
-                echo "Page ";
-            }
-
-            $lastlink = 0;
-            foreach($tmp as $i => $link) {
-                if($i > $lastlink + 1) {
-                    echo " ... "; // where one or more links have been omitted
-                } elseif($i) {
-                    echo " | ";
-                }
-                echo $link;
-                $lastlink = $i;
-            }
-
-            if($pageNumber <= $lastlink) {
-                // display 'Next' link
-                echo " | <a href=\"?page=" . ($pageNumber + 1) . "\">Next &raquo;</a>";
-            }
-
-            echo "</p>\n\n";
-        }
-
-        ?>
-        ?>
-    </div>
 
   <?php
     include "components/footer.php";
