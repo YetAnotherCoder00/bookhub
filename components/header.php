@@ -151,6 +151,10 @@ span + span {
   }
 }
 
+.placeholder {
+    width: 80px;
+}
+
 
 </style>
 
