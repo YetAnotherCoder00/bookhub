@@ -54,6 +54,7 @@ body {
     <div class="menu">
       <a href="/">Home</a>
       <a href="/search">Search</a>
+      <a href="/login">LogIn</a>
     </div>
 
 

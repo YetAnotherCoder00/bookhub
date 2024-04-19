@@ -134,3 +134,16 @@ p {
   border-radius: 1vw;
 }
 
+.login_panel {
+  width: 40%;
+  height: 30vw;
+  border: solid 0.1vw #60A0E9;
+  align-self: center;
+}
+
+.login_content {
+  padding: 5vh;
+  display: flex;
+  justify-content: center;
+}
+
