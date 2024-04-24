@@ -4,22 +4,32 @@ include "../server/mysqlInterface.php";
 
 $conn = connectToDb();
 
-$email = "";
+$username = "";
 $password = "";
-if (isset($_POST["email"])) {
-  $email = htmlspecialchars($_POST["email"]);
+if (isset($_POST["username"])) {
+  $username = htmlspecialchars($_POST["username"]);
 }
 if (isset($_POST["password"])) {
   $password = htmlspecialchars($_POST["password"]);
 }
 
-echo password_hash($password, PASSWORD_DEFAULT);
+// echo password_hash($password, PASSWORD_DEFAULT);
 
-$query = "SELECT email, password FROM benutzer";
+// $hashed = password_hash($password, PASSWORD_DEFAULT);
+$query = "SELECT email, passwort, benutzername FROM benutzer";
 
 $result = $conn->query($query);
 foreach ($result->fetch_all() as $row) {
-    $users[] = $row[0];
+    // print_r($row);
+    if (password_verify($password, $row[1])) {
+        echo "login: {$username} {$password}\n";
+        session_start();
+        // echo "hashed: {$hashed}\n";
+        // echo "{$verified}";
+        $_SESSION["username"] = $username;
+
+        $_SESSION["loggedin"] = true;
+    }
 }
 
 ?>
@@ -40,8 +50,8 @@ foreach ($result->fetch_all() as $row) {
               <h3>LogIn</h3>
             </div>
             <div class="login_form">
-            <form method="POST" action="/login/index.php">
-              <input class="mail" name="email" type="email" placeholder="E-Mail"><br>
+            <form method="POST" action="./index.php">
+              <input class="mail" name="username" type="text" placeholder="E-Mail"><br>
               <input class="password" name="password" type="password" placeholder="Password"><br>
               <button type="submit">Submit the Flesh</button>
             </form>

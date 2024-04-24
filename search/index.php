@@ -81,52 +81,53 @@ foreach ($result->fetch_all() as $row) {
 
 
     <div class="advancedsearch">
-    <form action="/search/index.php" method="get" class="advancedsearch_form">
-        <?php
-        echo sprintf("<input name=\"search\" value=\"%s\" type=\"hidden\" />", $search);
-
-        ?>
-
-        <select name="sortBy" onchange="this.form.submit()">
-            <option value="" disabled selected>Sort by <i class="fa-solid fa-chevron-down"></i></option>
+    <div class="options">
+        <form action="/search/index.php" method="get" class="advancedsearch_form">
             <?php
-            foreach ($sortByColumns as $sortByColumn) {
-                echo sprintf("<option value=\"%s\">%s</option>", $sortByColumn, $sortByColumn);
+            echo sprintf("<input name=\"search\" value=\"%s\" type=\"hidden\" />", $search);
+
+            ?>
+
+            <select name="sortBy" onchange="this.form.submit()">
+                <option value="" disabled selected>Sort by <i class="fa-solid fa-chevron-down"></i></option>
+                <?php
+                foreach ($sortByColumns as $sortByColumn) {
+                    echo sprintf("<option value=\"%s\">%s</option>", $sortByColumn, $sortByColumn);
+                }
+                ?>
+            </select>
+            <?php
+            if (isset($_GET["filter"])) {
+                echo sprintf("<input name=\"filter\" value=\"%s\" type=\"hidden\" />", $_GET["filter"]);
             }
             ?>
-        </select>
-        <?php
-        if (isset($_GET["filter"])) {
-            echo sprintf("<input name=\"filter\" value=\"%s\" type=\"hidden\" />", $_GET["filter"]);
-        }
-        ?>
-    </form>
-    <button class="activateFilters">Filters</button>
-    <form action="/search/index.php" method="get" class="advancedsearch_form">
-        <?php
-        echo sprintf("<input name=\"search\" value=\"%s\" type=\"hidden\" />", $search);
-        echo sprintf("<input name=\"sortBy\" value=\"%s\" type=\"hidden\" />", $sortBy);
-        ?>
-        <select name="filter" onchange="this.form.submit()">
-            <option value="" disabled selected>Filter <i class="fa-solid fa-chevron-down"></i></option>
+        </form>
+        <form action="/search/index.php" method="get" class="advancedsearch_form">
             <?php
-            echo "<option disabled>Kategorien</option>";
-            foreach ($kategorien as $kategorie) {
-                echo sprintf("<option value=\"1%s\">%s</option>", $kategorie, $kategorie);
-            }
-
-            echo "<option disabled>Verkauft</option>";
-            foreach ($verkauft as $value) {
-                echo sprintf("<option value=\"2%s\">%s</option>", $value, $value);
-            }
-
-            echo "<option disabled>Zustände</option>";
-            foreach ($zustaende as $zustand) {
-                echo sprintf("<option value=\"3%s\">%s</option>", $zustand, $zustand);
-            }
+            echo sprintf("<input name=\"search\" value=\"%s\" type=\"hidden\" />", $search);
+            echo sprintf("<input name=\"sortBy\" value=\"%s\" type=\"hidden\" />", $sortBy);
             ?>
-        </select>
-    </form>
+            <select name="filter" onchange="this.form.submit()">
+                <option value="" disabled selected>Filter <i class="fa-solid fa-chevron-down"></i></option>
+                <?php
+                echo "<option disabled>Kategorien</option>";
+                foreach ($kategorien as $kategorie) {
+                    echo sprintf("<option value=\"1%s\">%s</option>", $kategorie, $kategorie);
+                }
+
+                echo "<option disabled>Verkauft</option>";
+                foreach ($verkauft as $value) {
+                    echo sprintf("<option value=\"2%s\">%s</option>", $value, $value);
+                }
+
+                echo "<option disabled>Zustände</option>";
+                foreach ($zustaende as $zustand) {
+                    echo sprintf("<option value=\"3%s\">%s</option>", $zustand, $zustand);
+                }
+                ?>
+            </select>
+        </form>
+    </div>
 
     <div class="mainDiv">
         <?php
@@ -195,13 +196,34 @@ foreach ($result->fetch_all() as $row) {
 
         $result = $conn->query($query);
         foreach ($result->fetch_all() as $value) {
-            echo "<div class='bookDiv'>";
-            echo "<a href='/books?id=" . $value[$idIndex] . "'>" .
+            echo "<div class='book_container'>";
+            echo "<div class='book_content'>";
+            echo sprintf("<img src='../assets/cover%d.jpg' class=book_image>", rand(1, 5));
+            echo "<a href='/books?id=" . $value[$idIndex] . " class='book_textfield'>" .
                 $value[$idIndex] . ": " . $value[$kurzTitleIndex] . "
                 </a>" . "<br> <br>";
             echo "</div>";
+            echo "</div>";
         }
 
+/*
+<div class="book_container">
+    <div class="book_content">
+
+        <div class="book_imageframe">
+            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
+        </div>
+
+        <div class="book_textfield">
+            <h2><?= $bookInfo1[0] ?></h2>
+        <p><?= $bookInfo1[1] ?> </p>
+        <br><br><br><br><br><br>
+        <h1 class="book_price"><?= floatval($bookInfo1[2]) / 100 ?></h1>
+    </div>
+
+    </div>
+</div>
+*/
         $pageCount = $pageCount[0] / $booksPerPage ?? 0;
 
         $linkBuilder = "&search=" . $search;

@@ -14,7 +14,7 @@ body {
 
 .advancedsearch {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -147,3 +147,8 @@ p {
   justify-content: center;
 }
 
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

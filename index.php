@@ -17,6 +17,8 @@ else {
 }
 
 
+
+
 $idIndex = 0;
 $kurzTitleIndex = 1;
 
