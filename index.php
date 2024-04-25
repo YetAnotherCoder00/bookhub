@@ -2,40 +2,62 @@
 
 include "server/mysqlInterface.php";
 
+// setting default values
+$booksPerPage = 18;
+$pageNumber = 0;
+$sortBy = "id";
+
+// declare which column contains which data
+$idIndex = 0;
+$kurzTitleIndex = 1;
+$titleIndex = 2;
+$priceIndex = 3;
+
+$username = "";
+$loggedIn = false;
+
+// getting data from the url
 if (isset($_GET["page"])) {
     $pageNumber = htmlspecialchars($_GET["page"]);
-}
-else {
-    $pageNumber = 0;
 }
 
 if (isset($_GET["sortBy"])) {
     $sortBy = htmlspecialchars($_GET["sortBy"]);
 }
-else {
-    $sortBy = "id";
+
+// starting session
+session_start();
+
+// getting data from session
+if (isset($_SESSION["username"])) {
+    $username = htmlspecialchars($_SESSION["username"]);
+}
+
+if (isset($_SESSION["loggedIn"])) {
+    $loggedIn = htmlspecialchars($_SESSION["loggedIn"]);
 }
 
 
-
-
-$idIndex = 0;
-$kurzTitleIndex = 1;
-
-$booksPerPage = 18;
-
 $conn = connectToDb();
 
-// book 1 = 1, book 2 = 999, book 3 = 712
-$books = [];
-$result = $conn->query("SELECT kurztitle, title, price FROM buecher WHERE id = 1");
-$bookInfo1 = $result->fetch_row();
+// choose predetermined books
+$bookData = [];
+$selectedBooks = [1, 99, 712];
 
-$result = $conn->query("SELECT kurztitle, title, price FROM buecher WHERE id = 999");
-$bookInfo2 = $result->fetch_row();
+$query = "SELECT id, kurztitle, title, price FROM buecher WHERE id = ";
 
-$result = $conn->query("SELECT kurztitle, title, price FROM buecher WHERE id = 712");
-$bookInfo3 = $result->fetch_row();
+for ($i = 0; $i < count($selectedBooks); $i++) {
+    $query .= $selectedBooks[$i];
+    if ($i < count($selectedBooks) - 1) {
+        $query .= " OR id = ";
+    }
+}
+
+$result = $conn->query($query);
+
+foreach ($result->fetch_all() as $row) {
+    $bookData[] = $row;
+}
 
 ?>
 
@@ -59,64 +81,36 @@ $bookInfo3 = $result->fetch_row();
       </form>
     </div> 
 
-
-
   </div>
   </div>
 
-<div class="book_container">
-    <div class="book_content">
+<?php
 
-        <div class="book_imageframe">
-            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
+foreach ($bookData as $book) {
+    echo "
+    <div class='book_container'>
+        <div class='book_content'>
+        
+        
+
+            <div class='book_imageframe'>
+                <img src='../assets/cover" . rand(1, 5) . ".jpg' class=book_image>
+            </div>
+            <div class='book_textfield'>
+                <h2>" . $book[$kurzTitleIndex] . "</h2>
+                <p>" . $book[$titleIndex] . "</p>
+                <br><br><br><br><br><br>
+                <h1 class='book_price'>" . floatval($book[$priceIndex]) / 100 . "</h1>
+            </div>
         </div>
-
-        <div class="book_textfield">
-            <h2><?= $bookInfo1[0] ?></h2>
-            <p><?= $bookInfo1[1] ?> </p>
-            <br><br><br><br><br><br>
-            <h1 class="book_price"><?= floatval($bookInfo1[2]) / 100 ?></h1>
-        </div>
-
     </div>
-</div>
-<div class="book_container">
-    <div class="book_content">
+        ";
 
-        <div class="book_imageframe">
-            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
-        </div>
+}
 
-        <div class="book_textfield">
-            <h2><?= $bookInfo2[0] ?></h2>
-            <p><?= $bookInfo2[1] ?> </p>
-            <br><br><br><br><br><br>
-            <h1 class="book_price"><?= floatval($bookInfo2[2]) / 100 ?></h1>
-        </div>
+include "components/footer.php";
 
-    </div>
-</div>
-<div class="book_container">
-    <div class="book_content">
-
-        <div class="book_imageframe">
-            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
-        </div>
-
-        <div class="book_textfield">
-            <h2><?= $bookInfo3[0] ?></h2>
-            <p><?= $bookInfo3[1] ?> </p>
-            <br><br><br><br><br><br>
-            <h1 class="book_price"><?= floatval($bookInfo3[2]) / 100 ?></h1>
-        </div>
-
-    </div>
-</div>
-
-
-  <?php
-    include "components/footer.php";
-  ?>
+?>
 
 </body>
 

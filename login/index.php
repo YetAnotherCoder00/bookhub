@@ -28,7 +28,7 @@ foreach ($result->fetch_all() as $row) {
         // echo "{$verified}";
         $_SESSION["username"] = $username;
 
-        $_SESSION["loggedin"] = true;
+        $_SESSION["loggedIn"] = true;
     }
 }
 
