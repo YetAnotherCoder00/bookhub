@@ -2,42 +2,36 @@
 
 include "../server/mysqlInterface.php";
 
-$sortByColumns = ["id", "kurztitle", "autor"];
-
-$filterColumns = ["kategorie", "verkauft", "zustand"];
-
-if (isset($_GET["page"])) {
-    $pageNumber = htmlspecialchars($_GET["page"]);
-}
-else {
-    $pageNumber = 0;
-}
-
-if (isset($_GET["sortBy"])) {
-    $sortBy = htmlspecialchars($_GET["sortBy"]);
-}
-else {
-    $sortBy = "id";
-}
-
-if (isset($_GET["search"])) {
-    $search = htmlspecialchars($_GET["search"]);
-}
-else {
-    $search = "";
-}
+// setting default values
+$booksPerPage = 18;
+$pageNumber = 0;
+$pageCount = 0;
+$sortBy = "id";
+$search = "";
 
 $idIndex = 0;
 $kurzTitleIndex = 1;
 
-$booksPerPage = 18;
-
-$conn = connectToDb();
+$sortByColumns = ["id", "kurztitle", "autor"];
+$filterColumns = ["kategorie", "verkauft", "zustand"];
 
 $kategorien = [];
 $verkauft = [];
 $zustaende = [];
 
+if (isset($_GET["page"])) {
+    $pageNumber = htmlspecialchars($_GET["page"]);
+}
+if (isset($_GET["sortBy"])) {
+    $sortBy = htmlspecialchars($_GET["sortBy"]);
+}
+if (isset($_GET["search"])) {
+    $search = htmlspecialchars($_GET["search"]);
+}
+
+$conn = connectToDb();
+
+// i don't think i could shorten this, since 'kategorien' is its own table
 $query = "SELECT distinct kategorie from book.kategorien";
 $result = $conn->query($query);
 foreach ($result->fetch_all() as $row) {
@@ -72,9 +66,9 @@ foreach ($result->fetch_all() as $row) {
 <div class="search_container">
 
     <div class="searchbar">
-        <form "index.php" method="get" class="search_form">
-        <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <input class="searchfield" type="text" placeholder="search..." name="search" />
+        <form action="./index.php" method="get" class="search_form">
+            <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input class="searchfield" type="text" placeholder="search..." name="search" />
         </form>
     </div>
 
@@ -82,12 +76,8 @@ foreach ($result->fetch_all() as $row) {
 
     <div class="advancedsearch">
     <div class="options">
-        <form action="/search/index.php" method="get" class="advancedsearch_form">
-            <?php
-            echo sprintf("<input name=\"search\" value=\"%s\" type=\"hidden\" />", $search);
-
-            ?>
-
+        <form action="./index.php" method="get" class="advancedsearch_form">
+            <input name="search" value="<?= $search ?>" type="hidden" />
             <select name="sortBy" onchange="this.form.submit()">
                 <option value="" disabled selected>Sort by <i class="fa-solid fa-chevron-down"></i></option>
                 <?php
@@ -102,11 +92,12 @@ foreach ($result->fetch_all() as $row) {
             }
             ?>
         </form>
-        <form action="/search/index.php" method="get" class="advancedsearch_form">
-            <?php
-            echo sprintf("<input name=\"search\" value=\"%s\" type=\"hidden\" />", $search);
-            echo sprintf("<input name=\"sortBy\" value=\"%s\" type=\"hidden\" />", $sortBy);
-            ?>
+        <form action="./index.php" method="get" class="advancedsearch_form">
+
+            <!-- hidden inputs, which contain the values of the other forms -->
+            <input name="search" value="<?= $search ?>" type="hidden" />
+            <input name="sortBy" value="<?= $sortBy ?>" type="hidden" />
+
             <select name="filter" onchange="this.form.submit()">
                 <option value="" disabled selected>Filter <i class="fa-solid fa-chevron-down"></i></option>
                 <?php
@@ -131,100 +122,33 @@ foreach ($result->fetch_all() as $row) {
 
     <div class="mainDiv">
         <?php
-        $pageCount = 0;
+        $filter = "";
+        $filterType = "";
         if (isset($_GET["filter"])) {
-            $filterChoice = '';
-            switch ($_GET["filter"][0]) {
-                case '1':
-                    $filterChoice = "kategorie";
-                    $filter = htmlspecialchars($_GET["filter"]);
-                    $kategorie = substr($filter, 1);
 
-                    $query = sprintf("SELECT COUNT(buecher.id) FROM book.buecher, book.kategorien
-                        WHERE kurztitle LIKE '%%%s%%' AND kategorien.kategorie = '%s' AND 
-                        buecher.kategorie = kategorien.id ORDER BY buecher.%s", $search, $kategorie, $sortBy);
-                    $result = $conn->query($query);
-                    $pageCount = $result->fetch_row();
+            $filter = substr(htmlspecialchars($_GET["filter"]), 1);
 
-                    $query = sprintf("SELECT buecher.id, kurztitle FROM book.buecher, book.kategorien
-                        WHERE kurztitle LIKE '%%%s%%' AND kategorien.kategorie = '%s' AND 
-                        buecher.kategorie = kategorien.id ORDER BY buecher.%s 
-                        LIMIT %d, %d", $search, $kategorie, $sortBy, $pageNumber * $booksPerPage, $booksPerPage);
-                    break;
-                case '2':
-                    $filterChoice = "verkauft";
-                    $filter = htmlspecialchars($_GET["filter"]);
-                    $verkauft = substr($filter, 1);
-
-                    $query = sprintf("SELECT COUNT(buecher.id) FROM book.buecher
-                        WHERE kurztitle LIKE '%%%s%%' AND buecher.verkauft = %s ORDER BY buecher.%s",
-                        $search, $verkauft, $sortBy);
-                    $result = $conn->query($query);
-                    $pageCount = $result->fetch_row();
-
-                    $query = sprintf("SELECT buecher.id, kurztitle FROM book.buecher
-                        WHERE kurztitle LIKE '%%%s%%' AND buecher.verkauft = %s ORDER BY buecher.%s 
-                        LIMIT %d, %d", $search, $verkauft, $sortBy, $pageNumber * $booksPerPage, $booksPerPage);
-                    break;
-                case '3':
-                    $filterChoice = "zustand";
-                    $filter = htmlspecialchars($_GET["filter"]);
-                    $zustand = substr($filter, 1);
-
-                    $query = sprintf("SELECT COUNT(buecher.id) FROM book.buecher
-                        WHERE kurztitle LIKE '%%%s%%' AND buecher.zustand = '%s' ORDER BY buecher.%s",
-                        $search, $zustand, $sortBy);
-                    $result = $conn->query($query);
-                    $pageCount = $result->fetch_row();
-
-                    $query = sprintf("SELECT buecher.id, kurztitle FROM book.buecher
-                        WHERE kurztitle LIKE '%%%s%%' AND buecher.zustand = '%s' ORDER BY buecher.%s 
-                        LIMIT %d, %d", $search, $zustand, $sortBy, $pageNumber * $booksPerPage, $booksPerPage);
-                    break;
-            }
-        }
-        else {
-            $query = sprintf("SELECT COUNT(buecher.id), kurztitle FROM book.buecher
-                        WHERE kurztitle LIKE '%%%s%%' ORDER BY buecher.%s", $search, $sortBy);
-            $result = $conn->query($query);
-            $pageCount = $result->fetch_row();
-
-            $query = sprintf("SELECT buecher.id, kurztitle FROM book.buecher
-                        WHERE kurztitle LIKE '%%%s%%' ORDER BY buecher.%s
-                        LIMIT %d, %d", $search, $sortBy, $pageNumber * $booksPerPage, $booksPerPage);
+            $filterType = htmlspecialchars($_GET["filter"])[0];
         }
 
-        $result = $conn->query($query);
-        foreach ($result->fetch_all() as $value) {
-            echo "<div class='book_container'>";
-            echo "<div class='book_content'>";
-            echo sprintf("<img src='../assets/cover%d.jpg' class=book_image>", rand(1, 5));
-            echo "<a href='/books?id=" . $value[$idIndex] . " class='book_textfield'>" .
-                $value[$idIndex] . ": " . $value[$kurzTitleIndex] . "
-                </a>" . "<br> <br>";
-            echo "</div>";
-            echo "</div>";
+        $pageCount = getCount($search, $sortBy, $pageNumber, $filter, $filterType);
+
+        $result = getResult($search, $sortBy, $pageNumber, $filter, $filterType);
+
+        // print book results, clean this mess up
+        foreach ($result as $value) {
+            echo sprintf("
+            <div class='book_container'>
+                <div class='book_content'>
+                    <img src='../assets/cover%d.jpg' class='book_image' alt='generic book cover'>
+                    <a href='../books?id=%d' class='book_textfield'>%d: %s</a> 
+                    <br> <br>
+                </div>
+            </div>
+            ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex]);
         }
 
-/*
-<div class="book_container">
-    <div class="book_content">
-
-        <div class="book_imageframe">
-            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
-        </div>
-
-        <div class="book_textfield">
-            <h2><?= $bookInfo1[0] ?></h2>
-        <p><?= $bookInfo1[1] ?> </p>
-        <br><br><br><br><br><br>
-        <h1 class="book_price"><?= floatval($bookInfo1[2]) / 100 ?></h1>
-    </div>
-
-    </div>
-</div>
-*/
-        $pageCount = $pageCount[0] / $booksPerPage ?? 0;
+        $pageCount = $pageCount / $booksPerPage ?? 0;
 
         $linkBuilder = "&search=" . $search;
 
