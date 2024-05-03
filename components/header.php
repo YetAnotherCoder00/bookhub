@@ -6,16 +6,20 @@
 
 .logo {
   padding-top: 1.5vh;
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 1;
 }
 
-
-body {
-  margin: 0;
+.logo img {
+  max-height: 100%;
 }
 
 #header_container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .inline {
@@ -23,19 +27,38 @@ body {
 }
 
 .placeholder {
-  width:10%;
+  width: 30%;
+
 }
 
 .menu {
-  width:10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 30%;
 }
 
+.menu a {
+  background: none;
+  border: none;
+  padding: 15px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.menu a:hover {
+  background: rgba(170, 170, 170, 0.062);
+  transition: 0.5s;
+}
+
+.menu a img {
+  color: white;
+  width: 4vh;
+  height: 4vh;
+}
 
 </style>
-
-
-
-
 
 
 <body>
@@ -47,14 +70,21 @@ body {
     </div>
 
 
-    <div class="logo inline">
-      <a href="/"><img src="../assets/logo.png"></a>
+    <div class="logo">
+      <a href="/"><img src="../assets/logo.png" alt="logo"></a>
     </div>
 
     <div class="menu">
-      <a href="/">Home</a>
-      <a href="/search">Search</a>
-      <a href="/login">LogIn</a>
+      <a href="/"> <img src="../assets/home.svg" alt="home icon" width="32" height="32"> </a>
+      <a href="/search"> <img src="../assets/search.svg" alt="search icon" width="32" height="32"> </a>
+      <?php
+      if (isset($_SESSION["loggedIn"]) and $_SESSION["loggedIn"]) {
+        echo '<a href="../logout"> <img src="../assets/logout.svg" alt="logout icon" width="32" height="32"> </a>';
+      }
+      else {
+				echo '<a href="../login"> <img src="../assets/login.svg" alt="login icon" width="32" height="32"> </a>';
+      }
+      ?>
     </div>
 
 
