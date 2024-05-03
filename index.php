@@ -61,7 +61,8 @@ foreach ($result->fetch_all() as $row) {
 
 ?>
 
-<html>
+<!DOCTYPE HTML>
+<html lang="de">
 <head>
     <link rel="stylesheet" href="index.css">
     <script src="https://kit.fontawesome.com/fb438f2369.js" crossorigin="anonymous"></script>

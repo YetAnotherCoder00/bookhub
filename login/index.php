@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include "../server/mysqlInterface.php";
 
 $conn = connectToDb();
@@ -13,21 +15,12 @@ if (isset($_POST["password"])) {
   $password = htmlspecialchars($_POST["password"]);
 }
 
-// echo password_hash($password, PASSWORD_DEFAULT);
-
-// $hashed = password_hash($password, PASSWORD_DEFAULT);
 $query = "SELECT email, passwort, benutzername FROM benutzer";
 
 $result = $conn->query($query);
 foreach ($result->fetch_all() as $row) {
-    // print_r($row);
     if (password_verify($password, $row[1])) {
-        echo "login: {$username} {$password}\n";
-        session_start();
-        // echo "hashed: {$hashed}\n";
-        // echo "{$verified}";
         $_SESSION["username"] = $username;
-
         $_SESSION["loggedIn"] = true;
     }
 }

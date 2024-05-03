@@ -14,7 +14,7 @@ $descriptionIndex = 2;
 
 $conn = connectToDb();
 
-$result = $conn->query("SELECT verkauft, kurztitle, title, zustand, autor, kategorie, price FROM buecher WHERE id = " . $id);
+$result = $conn->query("SELECT verkauft, kurztitle, title, zustand, autor, kategorie, price FROM book.buecher WHERE id = " . $id);
 // print_r($result->fetch_all());
 
 $bookInfo = $result->fetch_row();

@@ -3,11 +3,12 @@
 include "../server/mysqlInterface.php";
 
 // setting default values
+$linkBuilder = "";
 $booksPerPage = 18;
+$search = "";
 $pageNumber = 0;
 $pageCount = 0;
 $sortBy = "id";
-$search = "";
 
 $idIndex = 0;
 $kurzTitleIndex = 1;
@@ -19,14 +20,28 @@ $kategorien = [];
 $verkauft = [];
 $zustaende = [];
 
-if (isset($_GET["page"])) {
-    $pageNumber = htmlspecialchars($_GET["page"]);
+if (isset($_GET["search"])) {
+    $search = htmlspecialchars($_GET["search"]);
+    $linkBuilder = "&search=" . $search;
 }
 if (isset($_GET["sortBy"])) {
     $sortBy = htmlspecialchars($_GET["sortBy"]);
+    $linkBuilder .= "&sortBy=" . $sortBy;
 }
-if (isset($_GET["search"])) {
-    $search = htmlspecialchars($_GET["search"]);
+if (isset($_GET["page"])) {
+    $pageNumber = htmlspecialchars($_GET["page"]);
+}
+
+// starting session
+session_start();
+
+// getting data from session
+if (isset($_SESSION["username"])) {
+    $username = htmlspecialchars($_SESSION["username"]);
+}
+
+if (isset($_SESSION["loggedIn"])) {
+    $loggedIn = htmlspecialchars($_SESSION["loggedIn"]);
 }
 
 $conn = connectToDb();
@@ -125,10 +140,9 @@ foreach ($result->fetch_all() as $row) {
         $filter = "";
         $filterType = "";
         if (isset($_GET["filter"])) {
-
             $filter = substr(htmlspecialchars($_GET["filter"]), 1);
-
             $filterType = htmlspecialchars($_GET["filter"])[0];
+            $linkBuilder .= sprintf("&filter=%s", str_replace(' ', '+', $filter));
         }
 
         $pageCount = getCount($search, $sortBy, $pageNumber, $filter, $filterType);
@@ -148,18 +162,10 @@ foreach ($result->fetch_all() as $row) {
             ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex]);
         }
 
-        $linkBuilder = "&search=" . $search;
-
+        // todo: make pagination simpler
         $tmp = [];
 
         echo "<div>";
-
-        if (isset($_GET["sortBy"])) {
-            $linkBuilder = $linkBuilder . "&sortBy=" . $sortBy;
-        }
-        if (isset($_GET["filter"])) {
-            $linkBuilder = $linkBuilder . "&filter=" . str_replace(' ', '+', $filter);
-        }
         for ($i = 0; $i < ($pageCount); $i++) {
             if ($i == $pageNumber) {
                 $tmp[] = "<b>" . $pageNumber + 1 . "</b>";
@@ -170,7 +176,6 @@ foreach ($result->fetch_all() as $row) {
         }
 
         for ($i = count($tmp) - 3; $i > 2; $i--) {
-            // echo $i . ": " . abs($pageNumber - $i - 1) . "<br>";
             if (abs($pageNumber - $i - 1) > 2) {
                 unset($tmp[$i]);
             }
