@@ -22,10 +22,6 @@
   align-items: center;
 }
 
-.inline {
-  display: inline-block;
-}
-
 .placeholder {
   width: 30%;
 
@@ -53,7 +49,6 @@
 }
 
 .menu a img {
-  color: white;
   width: 4vh;
   height: 4vh;
 }
