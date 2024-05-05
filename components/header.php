@@ -5,15 +5,17 @@
 }
 
 .logo {
+  max-height: 100%;
   padding-top: 1.5vh;
   flex-grow: 2;
   display: flex;
   justify-content: center;
   flex-shrink: 1;
+  padding-bottom: 1vh;
 }
 
 .logo img {
-  max-height: 100%;
+  height: 100%;
 }
 
 #header_container {

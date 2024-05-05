@@ -2,14 +2,15 @@
 
 footer {
   background-color:#1C1D36;
+  width: 100%;
   height: 6vh;
-  padding: 1.5vh;
+  margin: 0;
 }
 
 .footer_container {
   display: flex;
   justify-content: space-between;
-  margin: 1.5vh;
+  padding: 1.5vh 1.5vh 0 1.5vh;
 }
 
 .links {

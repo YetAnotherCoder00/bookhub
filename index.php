@@ -73,17 +73,18 @@ foreach ($result->fetch_all() as $row) {
 <?php include "components/header.php"; ?>
 
   <div class="content" id="top">
-  <div class="search_container">
+    <div class="search_container">
 
-    <div class="searchbar"> 
-      <form action="search/index.php" method="get" class="search_form">
-          <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <input class="searchfield" type="text" placeholder="search..." name="search" />
-      </form>
-    </div> 
+      <div class="searchbar">
+        <form action="search/index.php" method="get" class="search_form">
+          <button class="searchbutton" type="submit">
+            <img src="../assets/search.svg" alt="search icon" width="32" height="32">
+          </button>
+          <input class="searchfield" type="text" placeholder="search..." name="search" />
+        </form>
+      </div>
 
-  </div>
-  </div>
+    </div>
 
 <?php
 
@@ -113,6 +114,7 @@ include "components/footer.php";
 
 ?>
 
+  </div>
 </body>
 
 </html>
