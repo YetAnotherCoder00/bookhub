@@ -67,7 +67,7 @@ foreach ($result->fetch_all() as $row) {
 
 ?>
 
-
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <link rel="stylesheet" href="../index.css">
@@ -78,11 +78,14 @@ foreach ($result->fetch_all() as $row) {
 
 <?php include "../components/header.php"; ?>
 
-<div class="search_container">
+<div class="content">
+  <div class="search_container">
 
     <div class="searchbar">
         <form action="./index.php" method="get" class="search_form">
-            <button class="searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="searchbutton" type="submit">
+              <img src="../assets/search.svg" alt="search icon" width="32" height="32">
+            </button>
             <input class="searchfield" type="text" placeholder="search..." name="search" />
         </form>
     </div>
@@ -90,133 +93,135 @@ foreach ($result->fetch_all() as $row) {
 
 
     <div class="advancedsearch">
-    <div class="options">
-        <form action="./index.php" method="get" class="advancedsearch_form">
+      <div class="options">
+          <form action="./index.php" method="get" class="advancedsearch_form">
+              <select name="sortBy" onchange="this.form.submit()">
+                  <option value="" disabled selected>Sort by <i class="fa-solid fa-chevron-down"></i></option>
+                  <?php
+                  foreach ($sortByColumns as $sortByColumn) {
+                      echo sprintf("<option value=\"%s\">%s</option>", $sortByColumn, $sortByColumn);
+                  }
+                  ?>
+              </select>
+              <?php
+              if (isset($_GET["filter"])) {
+                  echo sprintf("<input name=\"filter\" value=\"%s\" type=\"hidden\" />", $_GET["filter"]);
+              }
+              ?>
             <input name="search" value="<?= $search ?>" type="hidden" />
-            <select name="sortBy" onchange="this.form.submit()">
-                <option value="" disabled selected>Sort by <i class="fa-solid fa-chevron-down"></i></option>
-                <?php
-                foreach ($sortByColumns as $sortByColumn) {
-                    echo sprintf("<option value=\"%s\">%s</option>", $sortByColumn, $sortByColumn);
-                }
-                ?>
-            </select>
-            <?php
-            if (isset($_GET["filter"])) {
-                echo sprintf("<input name=\"filter\" value=\"%s\" type=\"hidden\" />", $_GET["filter"]);
-            }
-            ?>
-        </form>
-        <form action="./index.php" method="get" class="advancedsearch_form">
+          </form>
+          <form action="./index.php" method="get" class="advancedsearch_form">
+
+              <select name="filter" onchange="this.form.submit()">
+                  <option value="" disabled selected>Filter <i class="fa-solid fa-chevron-down"></i></option>
+                  <?php
+                  echo "<option disabled>Kategorien</option>";
+                  foreach ($kategorien as $kategorie) {
+                      echo sprintf("<option value=\"1%s\">%s</option>", $kategorie, $kategorie);
+                  }
+
+                  echo "<option disabled>Verkauft</option>";
+                  foreach ($verkauft as $value) {
+                      echo sprintf("<option value=\"2%s\">%s</option>", $value, $value);
+                  }
+
+                  echo "<option disabled>Zustände</option>";
+                  foreach ($zustaende as $zustand) {
+                      echo sprintf("<option value=\"3%s\">%s</option>", $zustand, $zustand);
+                  }
+                  ?>
+              </select>
 
             <!-- hidden inputs, which contain the values of the other forms -->
             <input name="search" value="<?= $search ?>" type="hidden" />
             <input name="sortBy" value="<?= $sortBy ?>" type="hidden" />
 
-            <select name="filter" onchange="this.form.submit()">
-                <option value="" disabled selected>Filter <i class="fa-solid fa-chevron-down"></i></option>
-                <?php
-                echo "<option disabled>Kategorien</option>";
-                foreach ($kategorien as $kategorie) {
-                    echo sprintf("<option value=\"1%s\">%s</option>", $kategorie, $kategorie);
-                }
-
-                echo "<option disabled>Verkauft</option>";
-                foreach ($verkauft as $value) {
-                    echo sprintf("<option value=\"2%s\">%s</option>", $value, $value);
-                }
-
-                echo "<option disabled>Zustände</option>";
-                foreach ($zustaende as $zustand) {
-                    echo sprintf("<option value=\"3%s\">%s</option>", $zustand, $zustand);
-                }
-                ?>
-            </select>
-        </form>
+          </form>
+      </div>
     </div>
+  </div>
 
-    <div class="mainDiv">
-        <?php
-        $filter = "";
-        $filterType = "";
-        if (isset($_GET["filter"])) {
-            $filter = substr(htmlspecialchars($_GET["filter"]), 1);
-            $filterType = htmlspecialchars($_GET["filter"])[0];
-            $linkBuilder .= sprintf("&filter=%s", str_replace(' ', '+', $filter));
-        }
+  <div class="search_result">
 
-        $pageCount = getCount($search, $sortBy, $pageNumber, $filter, $filterType);
+    <?php
+    $filter = "";
+    $filterType = "";
+    if (isset($_GET["filter"])) {
+        $filter = substr(htmlspecialchars($_GET["filter"]), 1);
+        $filterType = htmlspecialchars($_GET["filter"])[0];
+        $linkBuilder .= sprintf("&filter=%s", str_replace(' ', '+', $filter));
+    }
 
-        $rows = getResult($search, $sortBy, $pageNumber, $filter, $filterType);
+    $pageCount = getCount($search, $sortBy, $pageNumber, $filter, $filterType);
 
-        // print book results, clean this mess up
-        foreach ($rows as $value) {
-            echo sprintf("
-            <div class='book_container'>
-                <div class='book_content'>
-                    <img src='../assets/cover%d.jpg' class='book_image' alt='generic book cover'>
-                    <a href='../books?id=%d' class='book_textfield'>%d: %s</a> 
-                    <br> <br>
-                </div>
+    $rows = getResult($search, $sortBy, $pageNumber, $filter, $filterType);
+
+    // print book results, clean this mess up
+    foreach ($rows as $value) {
+        echo sprintf("
+        <div class='book_container book_search_container'>
+            <div class='book_content'>
+                <img src='../assets/cover%d.jpg' class='book_image' alt='generic book cover'>
+                <a href='../books?id=%d' class='book_textfield'>%d: %s</a> 
             </div>
-            ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex]);
+        </div>
+        ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex]);
+    }
+
+    // todo: make pagination simpler
+    $tmp = [];
+
+    echo "<div>";
+    for ($i = 0; $i < ($pageCount); $i++) {
+        if ($i == $pageNumber) {
+            $tmp[] = "<b>" . $pageNumber + 1 . "</b>";
+        }
+        else {
+            $tmp[] = "<a href='?page=" . $i . $linkBuilder . "'> " . ($i + 1) . " </a>";
+        }
+    }
+
+    for ($i = count($tmp) - 3; $i > 2; $i--) {
+        if (abs($pageNumber - $i - 1) > 2) {
+            unset($tmp[$i]);
+        }
+    }
+
+    // echo "<a href='?page=" . $i . $linkBuilder . "'> " . ($i + 1) . " </a>";
+    echo "</div>";
+
+    if(count($tmp) > 1) {
+        echo "<p>";
+
+        if($pageNumber > 1) {
+            // display 'Prev' link
+            echo "<a href=\"?page=" . ($pageNumber - 1) . $linkBuilder . "\">&laquo; Prev</a> | ";
+        } else {
+            echo "Page ";
         }
 
-        // todo: make pagination simpler
-        $tmp = [];
-
-        echo "<div>";
-        for ($i = 0; $i < ($pageCount); $i++) {
-            if ($i == $pageNumber) {
-                $tmp[] = "<b>" . $pageNumber + 1 . "</b>";
+        $lastlink = 0;
+        foreach($tmp as $i => $link) {
+            if($i > $lastlink + 1) {
+                echo " ... "; // where one or more links have been omitted
+            } elseif($i) {
+                echo " | ";
             }
-            else {
-                $tmp[] = "<a href='?page=" . $i . $linkBuilder . "'> " . ($i + 1) . " </a>";
-            }
+            echo $link;
+            $lastlink = $i;
         }
 
-        for ($i = count($tmp) - 3; $i > 2; $i--) {
-            if (abs($pageNumber - $i - 1) > 2) {
-                unset($tmp[$i]);
-            }
+        if($pageNumber <= $lastlink) {
+            // display 'Next' link
+            echo " | <a href=\"?page=" . ($pageNumber + 1) . $linkBuilder . "\">Next &raquo;</a>";
         }
 
-        // echo "<a href='?page=" . $i . $linkBuilder . "'> " . ($i + 1) . " </a>";
-        echo "</div>";
+        echo "</p>\n\n";
+    }
 
-        if(count($tmp) > 1) {
-            echo "<p>";
-
-            if($pageNumber > 1) {
-                // display 'Prev' link
-                echo "<a href=\"?page=" . ($pageNumber - 1) . $linkBuilder . "\">&laquo; Prev</a> | ";
-            } else {
-                echo "Page ";
-            }
-
-            $lastlink = 0;
-            foreach($tmp as $i => $link) {
-                if($i > $lastlink + 1) {
-                    echo " ... "; // where one or more links have been omitted
-                } elseif($i) {
-                    echo " | ";
-                }
-                echo $link;
-                $lastlink = $i;
-            }
-
-            if($pageNumber <= $lastlink) {
-                // display 'Next' link
-                echo " | <a href=\"?page=" . ($pageNumber + 1) . $linkBuilder . "\">Next &raquo;</a>";
-            }
-
-            echo "</p>\n\n";
-        }
-
-        ?>
-    </div>
-
-</div>
-    <?php include "../components/footer.php"; ?>
+    ?>
+  </div>
+  </div>
+	<?php include "../components/footer.php"; ?>
 </body>
 </html>
