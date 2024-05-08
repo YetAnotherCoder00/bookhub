@@ -44,8 +44,10 @@ foreach ($result->fetch_all() as $row) {
             </div>
             <div class="login_form">
             <form method="POST" action="./index.php">
-              <input class="mail" name="username" type="text" placeholder="E-Mail"><br>
-              <input class="password" name="password" type="password" placeholder="Password"><br>
+              <div>
+                <input class="mail" name="username" type="text" placeholder="E-Mail"><br>
+                <input class="password" name="password" type="password" placeholder="Password">
+              </div>
               <button type="submit">Submit the Flesh</button>
             </form>
             </div>
