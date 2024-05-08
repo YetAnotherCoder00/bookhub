@@ -25,9 +25,6 @@ if (isset($_GET["sortBy"])) {
     $sortBy = htmlspecialchars($_GET["sortBy"]);
 }
 
-// starting session
-session_start();
-
 // getting data from session
 if (isset($_SESSION["username"])) {
     $username = htmlspecialchars($_SESSION["username"]);
@@ -78,7 +75,7 @@ foreach ($result->fetch_all() as $row) {
       <div class="searchbar">
         <form action="search/index.php" method="get" class="search_form">
           <button class="searchbutton" type="submit">
-            <img src="../assets/search.svg" alt="search icon" width="32" height="32">
+            <img src="assets/search.svg" alt="search icon" width="32" height="32">
           </button>
           <input class="searchfield" type="text" placeholder="search..." name="search" />
         </form>
@@ -90,11 +87,9 @@ foreach ($result->fetch_all() as $row) {
 
 foreach ($bookData as $book) {
     echo "
+    <a href='books?id=". $book[$idIndex] . "'>
     <div class='book_container'>
         <div class='book_content'>
-        
-        
-
             <div class='book_imageframe'>
                 <img src='../assets/cover" . rand(1, 5) . ".jpg' class=book_image>
             </div>
@@ -106,6 +101,7 @@ foreach ($bookData as $book) {
             </div>
         </div>
     </div>
+    </a>
         ";
 
 }
@@ -118,4 +114,3 @@ include "components/footer.php";
 </body>
 
 </html>
-

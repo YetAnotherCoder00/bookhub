@@ -1,8 +1,10 @@
 <?php
 
+session_start();
+
 function connectToDb(): mysqli
 {
-    $servername = "172.17.0.1";
+    $servername = "mariadb";
     $username = "root";
     $password = "root";
     $database = "book";

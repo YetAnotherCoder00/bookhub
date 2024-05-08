@@ -32,9 +32,6 @@ if (isset($_GET["page"])) {
     $pageNumber = htmlspecialchars($_GET["page"]);
 }
 
-// starting session
-session_start();
-
 // getting data from session
 if (isset($_SESSION["username"])) {
     $username = htmlspecialchars($_SESSION["username"]);

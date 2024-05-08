@@ -1,12 +1,8 @@
-
 <?php
 
+include "../server/mysqlInterface.php";
+
 $id = $_GET["id"];
-
-
-// totally secure account management
-
-require "../server/mysqlInterface.php";
 
 $idIndex = 0;
 $kurzTitleIndex = 1;
@@ -22,8 +18,8 @@ $bookInfo = $result->fetch_row();
 
 ?>
 
-
-<html>
+<!DOCTYPE html>
+<html lang="de">
 
 <head>
 

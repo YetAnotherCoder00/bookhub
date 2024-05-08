@@ -1,6 +1,11 @@
 <?php
 
-session_start();
+
+enum index: int {
+  case email = 0;
+  case password = 1;
+  case username = 2;
+}
 
 include "../server/mysqlInterface.php";
 
@@ -15,11 +20,14 @@ if (isset($_POST["password"])) {
   $password = htmlspecialchars($_POST["password"]);
 }
 
-$query = "SELECT email, passwort, benutzername FROM benutzer";
+//$prepared = $conn->prepare("SELECT email, passwort, benutzername FROM benutzer WHERE benuztername LIKE ?");
+//$prepared->bind_param("s", $username);
+
+$query = sprintf("SELECT email, passwort, benutzername FROM benutzer where benutzername LIKE \"%s\"", $username);
 
 $result = $conn->query($query);
 foreach ($result->fetch_all() as $row) {
-    if (password_verify($password, $row[1])) {
+    if (password_verify($password, $row[index::password->value])) {
         $_SESSION["username"] = $username;
         $_SESSION["loggedIn"] = true;
     }
