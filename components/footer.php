@@ -5,6 +5,7 @@ footer {
   width: 100%;
   height: 6vh;
   margin: 0;
+  margin-top: auto;
 }
 
 .footer_container {

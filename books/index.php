@@ -36,25 +36,25 @@ $bookInfo = $result->fetch_row();
 <body>
   <?php include "../components/header.php"; ?>
 
+    <div class="content">
+      <div class="book_container">
+        <div class="book_content">
 
-    <div class="book_container">
-      <div class="book_content">
+          <div class="book_imageframe">
+            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
+          </div>
 
-        <div class="book_imageframe">
-          <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
+          <div class="book_textfield">
+            <h2><?= $bookInfo[1] ?></h2>
+              <p>Autor: <?= $bookInfo[4] ?></p>
+              <p>Kategorie: <?= $bookInfo[5] ?></p>
+              <p>Zustand: <?= $bookInfo[3] ?></p>
+              <p>Verkauft: <?= $bookInfo[0] ?></p>
+            <p><?= $bookInfo[2] ?> </p>
+              <br><br><br><br><br><br>
+            <h1 class="book_price"><?= floatval($bookInfo[6]) / 100 ?></h1>
+          </div>
         </div>
-
-        <div class="book_textfield">
-          <h2><?= $bookInfo[1] ?></h2>
-            <p>Autor: <?= $bookInfo[4] ?></p>
-            <p>Kategorie: <?= $bookInfo[5] ?></p>
-            <p>Zustand: <?= $bookInfo[3] ?></p>
-            <p>Verkauft: <?= $bookInfo[0] ?></p>
-          <p><?= $bookInfo[2] ?> </p>
-            <br><br><br><br><br><br>
-          <h1 class="book_price"><?= floatval($bookInfo[6]) / 100 ?></h1>
-        </div>
-
       </div>
     </div>
 

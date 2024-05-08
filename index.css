@@ -9,9 +9,11 @@ html {
 
 body {
   overflow: auto;
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   background-color: #0C0A1A;
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
