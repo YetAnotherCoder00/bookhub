@@ -1,6 +1,5 @@
 <?php
-// start session to get data
-session_start();
+include "../server/mysqlInterface.php";
 
 // unset session variables
 unset($_SESSION["username"]);

@@ -1,12 +1,8 @@
-
 <?php
 
+include "../server/mysqlInterface.php";
+
 $id = $_GET["id"];
-
-
-// totally secure account management
-
-require "../server/mysqlInterface.php";
 
 $idIndex = 0;
 $kurzTitleIndex = 1;
@@ -22,8 +18,8 @@ $bookInfo = $result->fetch_row();
 
 ?>
 
-
-<html>
+<!DOCTYPE html>
+<html lang="de">
 
 <head>
 
@@ -52,7 +48,7 @@ $bookInfo = $result->fetch_row();
               <p>Verkauft: <?= $bookInfo[0] ?></p>
             <p><?= $bookInfo[2] ?> </p>
               <br><br><br><br><br><br>
-            <h1 class="book_price"><?= floatval($bookInfo[6]) / 100 ?></h1>
+            <h1 class="book_price"><?= number_format(floatval($bookInfo[6]) / 100, 2) ?></h1>
           </div>
         </div>
       </div>
