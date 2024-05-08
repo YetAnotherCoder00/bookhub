@@ -14,22 +14,6 @@ body {
   background-color: #0C0A1A;
 }
 
-.search_container {
-  width: 70%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 0 auto;
-}
-
-.advancedsearch {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 2vh;
-}
-
 .content {
   margin-top: 3%;
   display: flex;
@@ -37,37 +21,7 @@ body {
   flex-direction: column;
 }
 
-.searchdiv {
-  width: 100%;
-}
-
-.search_form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.searchfield {
-  width: 100%;
-  font-size: 1.5vw;
-  background-color: #1C1D36;
-  border: solid 0 #1C1D36;
-  border-radius: 0 10vw 10vw 0;
-  margin-right: 0;
-}
-
-.searchfield:focus{
-  outline: none;
-}
-
-.searchbutton {
-  background-color: #1C1D36;
-  font-size: 1.5vw;
-  border: solid 0 #1C1D36;
-  border-radius: 10vw 0 0 10vw;
-  padding-left: 1vh;
-  /*padding-top: 1vh;*/
-}
+/* --------------------------------------Home---------------------------------------- */
 
 .slider_container{
   width: 50%;
@@ -115,6 +69,11 @@ p {
   font-size: 1vw;
 }
 
+
+
+
+/* -------------------------------------Books---------------------------------------- */
+
 .book_container {
   width: 50%;
   display: flex;
@@ -124,11 +83,6 @@ p {
   border: solid 0.1vw #60A0E9;
   border-radius: 2vw;
   padding: 1vw;
-}
-
-.book_search_container {
-  width: 20%;
-  margin: 0;
 }
 
 .book_content {
@@ -154,6 +108,11 @@ p {
   border-radius: 1vw;
 }
 
+
+
+
+/* --------------------------------------Login--------------------------------------- */
+
 .login_panel {
   width: 40%;
   height: 30vw;
@@ -165,6 +124,58 @@ p {
   padding: 5vh;
   display: flex;
   justify-content: center;
+}
+
+
+/* --------------------------------------Search--------------------------------------- */
+
+
+.search_container {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.advancedsearch {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 2vh;
+}
+
+.searchdiv {
+  width: 100%;
+}
+
+.search_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchfield {
+  width: 100%;
+  font-size: 1.5vw;
+  background-color: #1C1D36;
+  border: solid 0 #1C1D36;
+  border-radius: 0 10vw 10vw 0;
+  margin-right: 0;
+}
+
+.searchfield:focus{
+  outline: none;
+}
+
+.searchbutton {
+  background-color: #1C1D36;
+  font-size: 1.5vw;
+  border: solid 0 #1C1D36;
+  border-radius: 10vw 0 0 10vw;
+  padding-left: 1vh;
+  /*padding-top: 1vh;*/
 }
 
 .options {
@@ -208,38 +219,7 @@ p {
   padding: 0 0 0 1vh;
 }
 
-.login_form form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1vh;
-}
-
-.login_form form div {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1vh;
-}
-
-.login_form form div input {
-  background: inherit;
-  font-size: 2vh;
-  background-color: #1C1D36;
-  border: solid 0 #1C1D36;
-  border-radius: 10vh;
-  padding: 0.5vh 1vh;
-}
-
-.login_form form button {
-  background: inherit;
-  font-size: 2vh;
-  background-color: #1C1D36;
-  border: solid 0 #1C1D36;
-  border-radius: 10vh;
-  padding: 0.5vh 1vh;
+.book_search_container {
+  width: 20%;
+  margin: 0;
 }
