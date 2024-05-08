@@ -37,7 +37,7 @@ foreach ($result->fetch_all() as $row) {
         
       <?php include "../components/header.php" ?>
         
-        <div class="login_content">
+        <div class="content">
           <div class="login_panel">
             <div class="login_title">
               <h3>LogIn</h3>
