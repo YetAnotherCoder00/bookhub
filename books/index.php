@@ -48,7 +48,7 @@ $bookInfo = $result->fetch_row();
               <p>Verkauft: <?= $bookInfo[0] ?></p>
             <p><?= $bookInfo[2] ?> </p>
               <br><br><br><br><br><br>
-            <h1 class="book_price"><?= floatval($bookInfo[6]) / 100 ?></h1>
+            <h1 class="book_price"><?= number_format(floatval($bookInfo[6]) / 100, 2) ?></h1>
           </div>
         </div>
       </div>

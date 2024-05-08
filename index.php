@@ -97,7 +97,7 @@ foreach ($bookData as $book) {
                 <h2>" . $book[$kurzTitleIndex] . "</h2>
                 <p>" . $book[$titleIndex] . "</p>
                 <br><br><br><br><br><br>
-                <h1 class='book_price'>" . floatval($book[$priceIndex]) / 100 . "</h1>
+                <h1 class='book_price'>" . number_format(floatval($book[$priceIndex]) / 100, 2) . "</h1>
             </div>
         </div>
     </div>
