@@ -15,7 +15,7 @@ footer {
 }
 
 .links {
-  width: 6vw;
+  width: 8vw;
   display: flex;
   justify-content: space-between;
 }
