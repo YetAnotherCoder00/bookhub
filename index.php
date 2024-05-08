@@ -87,8 +87,8 @@ foreach ($result->fetch_all() as $row) {
 
 foreach ($bookData as $book) {
     echo "
-    <a href='books?id=". $book[$idIndex] . "'>
     <div class='book_container'>
+    <a href='books?id=". $book[$idIndex] . "'>
         <div class='book_content'>
             <div class='book_imageframe'>
                 <img src='../assets/cover" . rand(1, 5) . ".jpg' class=book_image>
@@ -100,8 +100,8 @@ foreach ($bookData as $book) {
                 <h1 class='book_price'>" . number_format(floatval($book[$priceIndex]) / 100, 2) . "</h1>
             </div>
         </div>
-    </div>
     </a>
+    </div>
         ";
 
 }
