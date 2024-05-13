@@ -1,6 +1,5 @@
 <?php
 
-
 enum index: int {
   case email = 0;
   case password = 1;
@@ -20,9 +19,6 @@ if (isset($_POST["password"])) {
   $password = htmlspecialchars($_POST["password"]);
 }
 
-//$prepared = $conn->prepare("SELECT email, passwort, benutzername FROM benutzer WHERE benuztername LIKE ?");
-//$prepared->bind_param("s", $username);
-
 $query = sprintf("SELECT email, passwort, benutzername FROM benutzer where benutzername LIKE \"%s\"", $username);
 
 $result = $conn->query($query);
@@ -31,6 +27,11 @@ foreach ($result->fetch_all() as $row) {
         $_SESSION["username"] = $username;
         $_SESSION["loggedIn"] = true;
     }
+}
+
+if (isset($_SESSION["username"]) && isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
+	header("Location: ../index.php", true);
+	die();
 }
 
 ?>
