@@ -149,7 +149,7 @@ foreach ($result->fetch_all() as $row) {
         $linkBuilder .= sprintf("&filter=%s", str_replace(' ', '+', $filter));
     }
 
-    $pageCount = getCount($search, $sortBy, $pageNumber, $filter, $filterType);
+    $pageCount = getCount($search, $filter, $filterType);
 
     $rows = getResult($search, $sortBy, $pageNumber, $filter, $filterType);
 

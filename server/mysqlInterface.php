@@ -46,7 +46,7 @@ function setPrice(): void
     $conn->query($query);
 }
 
-function getCount($search, $sortBy, $pageNumber, $filter, $filterType): int
+function getCount($search, $filter, $filterType): int
 {
     $booksPerPage = 18;
     $conn = connectToDb();
