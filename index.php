@@ -12,7 +12,6 @@ $idIndex = 0;
 $kurzTitleIndex = 1;
 $titleIndex = 2;
 $priceIndex = 3;
-
 $username = "";
 $loggedIn = false;
 
