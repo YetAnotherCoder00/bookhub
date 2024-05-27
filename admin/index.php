@@ -2,7 +2,7 @@
 include "../server/mysqlInterface.php";
 
 if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
-	header("Location: ../index.php", true);
+	header("Location: ../index.php");
 	die();
 }
 ?>

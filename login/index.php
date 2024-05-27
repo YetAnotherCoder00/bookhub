@@ -1,10 +1,6 @@
 <?php
 
-enum index: int {
-  case email = 0;
-  case password = 1;
-  case username = 2;
-}
+$indexes = ["email" => 0, "password" => 1, "username" => 2, "admin" => 3];
 
 include "../server/mysqlInterface.php";
 
@@ -19,18 +15,22 @@ if (isset($_POST["password"])) {
   $password = htmlspecialchars($_POST["password"]);
 }
 
-$query = sprintf("SELECT email, passwort, benutzername FROM benutzer where benutzername LIKE \"%s\"", $username);
+$query = sprintf("SELECT email, passwort, benutzername, admin FROM benutzer where benutzername LIKE \"%s\"", $username);
 
 $result = $conn->query($query);
 foreach ($result->fetch_all() as $row) {
-    if (password_verify($password, $row[index::password->value])) {
+    if (password_verify($password, $row[$indexes["password"]])) {
         $_SESSION["username"] = $username;
         $_SESSION["loggedIn"] = true;
+
+        if (isset($row[$indexes["admin"]]) && $row[$indexes["admin"]] == 1) {
+            $_SESSION["admin"] = true;
+        }
     }
 }
 
 if (isset($_SESSION["username"]) && isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
-	header("Location: ../index.php", true);
+	header("Location: ../index.php");
 	die();
 }
 
