@@ -82,9 +82,15 @@ p {
   align-items: center;
   margin: 5vw auto;
   flex-direction: column;
-  border: solid 0.1vw #60A0E9;
+  border: solid 0.1vw;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to left, red, green);
   border-radius: 2vw;
   padding: 1vw;
+}
+
+.book_container::after {
+  border-radius: 2vw;
 }
 
 .book_content {
