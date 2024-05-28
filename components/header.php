@@ -72,6 +72,11 @@
     </div>
 
     <div class="menu">
+      <?php
+      if (isset($_SESSION["loggedIn"]) and $_SESSION["loggedIn"]) {
+        echo '<a href="../admin"> <img src="../assets/admin.svg" alt="admin panel" width="32" height="32"> </a>';
+      }
+      ?>
       <a href="/"> <img src="../assets/home.svg" alt="home icon" width="32" height="32"> </a>
       <a href="/search"> <img src="../assets/search.svg" alt="search icon" width="32" height="32"> </a>
       <?php

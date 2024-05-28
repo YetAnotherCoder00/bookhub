@@ -20,6 +20,8 @@ $kategorien = [];
 $verkauft = [];
 $zustaende = [];
 
+$admin = false;
+
 if (isset($_GET["search"])) {
     $search = htmlspecialchars($_GET["search"]);
     $linkBuilder = "&search=" . $search;
@@ -38,7 +40,11 @@ if (isset($_SESSION["username"])) {
 }
 
 if (isset($_SESSION["loggedIn"])) {
-    $loggedIn = htmlspecialchars($_SESSION["loggedIn"]);
+    $loggedIn = $_SESSION["loggedIn"];
+}
+
+if (isset($_SESSION["admin"]) && $_SESSION["admin"]) {
+    $admin = true;
 }
 
 $conn = connectToDb();
@@ -149,7 +155,7 @@ foreach ($result->fetch_all() as $row) {
         $linkBuilder .= sprintf("&filter=%s", str_replace(' ', '+', $filter));
     }
 
-    $pageCount = getCount($search, $sortBy, $pageNumber, $filter, $filterType);
+    $pageCount = getCount($search, $filter, $filterType);
 
     $rows = getResult($search, $sortBy, $pageNumber, $filter, $filterType);
 
@@ -161,8 +167,13 @@ foreach ($result->fetch_all() as $row) {
                 <img src='../assets/cover%d.jpg' class='book_image' alt='generic book cover'>
                 <a href='../books?id=%d' class='book_textfield'>%d: %s</a> 
             </div>
+            <div class='book_content'>
+            <a href='../admin/update.php?id=%d' class='book_textfield'>update</a>
+            <a href='../admin/delete.php?id=%d' class='book_textfield'>delete</a>
+            </div>
         </div>
-        ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex]);
+        ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex],
+        $value[$idIndex], $value[$idIndex]);
     }
 
     // todo: make pagination simpler
