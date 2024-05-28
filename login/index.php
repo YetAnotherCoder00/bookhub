@@ -15,9 +15,12 @@ if (isset($_POST["password"])) {
   $password = htmlspecialchars($_POST["password"]);
 }
 
-$query = sprintf("SELECT email, passwort, benutzername, admin FROM benutzer where benutzername LIKE \"%s\"", $username);
+//$query = sprintf("SELECT email, passwort, benutzername, admin FROM benutzer where benutzername LIKE \"%s\"", $username);
+$query = $conn->prepare("SELECT email, passwort, benutzername, admin FROM benutzer WHERE benutzername LIKE ?");
+$query->bind_param("s", $username);
+$query->execute();
 
-$result = $conn->query($query);
+$result = $query->get_result();
 foreach ($result->fetch_all() as $row) {
     if (password_verify($password, $row[$indexes["password"]])) {
         $_SESSION["username"] = $username;
