@@ -60,6 +60,7 @@ if (isset($_SESSION["username"]) && isset($_SESSION["loggedIn"]) && $_SESSION["l
                 </div>
                 <button type="submit">Submit the Flesh</button>
               </form>
+                  <a href="../register">register</a>
               </div>
             </div>
           </div>
