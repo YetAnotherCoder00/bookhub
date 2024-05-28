@@ -2,11 +2,12 @@
 
 session_start();
 
+
 function connectToDb(): mysqli
 {
-    $servername = "172.17.0.1";
+    $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "";
     $database = "book";
 
 
@@ -51,58 +52,65 @@ function getCount($search, $filter, $filterType): int
     $booksPerPage = 18;
     $conn = connectToDb();
 
-    // messy workaround for having the "kategorien" table while not having to filter on it
-    $query = sprintf("SELECT COUNT(distinct buecher.id) FROM book.buecher, book.kategorien 
-        WHERE kurztitle LIKE '%%%s%%'", $search);
+    $query = "SELECT COUNT(distinct buecher.id) FROM book.buecher, book.kategorien 
+        WHERE kurztitle LIKE ?";
 
-    if (isset($filter))
+    if (isset($filter) && $filter != "")
     {
         switch ($filterType) {
             case '1':
-                $query .= sprintf(" AND kategorien.kategorie = '%s' AND buecher.kategorie = kategorien.id", $filter);
+                $query .= " AND kategorien.kategorie = ? AND buecher.kategorie = kategorien.id";
                 break;
             case '2':
-                $query .= sprintf(" AND buecher.verkauft = %s", $filter);
+                $query .= " AND buecher.verkauft = ?";
                 break;
             case '3':
-                $query .= sprintf(" AND buecher.zustand = '%s'", $filter);
+                $query .= " AND buecher.zustand = ?";
                 break;
             default:
                 break;
         }
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ss", $search, $filter);
     }
-    $result = $conn->query($query)->fetch_row();
+    else {
+      $stmt = $conn->prepare($query);
+      $stmt->bind_param("s", $search);
+    }
+    $stmt->execute();
+
+    $result = $stmt->get_result()->fetch_row();
 
     return ceil($result[0] / $booksPerPage);
 }
 
 function getResult(string $search, string $sortBy, int $pageNumber, string $filter, string $filterType): array
 {
-    $booksPerPage = 18;
-    $conn = connectToDb();
+  $booksPerPage = 18;
+  $conn = connectToDb();
 
-    $query = sprintf("SELECT distinct buecher.id, kurztitle, buecher.price FROM book.buecher, book.kategorien
+  $query = sprintf("SELECT distinct buecher.id, kurztitle, buecher.price FROM book.buecher, book.kategorien
         WHERE kurztitle LIKE '%%%s%%'", $search);
 
-    if ($filter != "")
+  if ($filter != "")
+  {
+    switch ($filterType)
     {
-        switch ($filterType)
-        {
-            case '1':
-                $query .= sprintf(" AND kategorien.kategorie = '%s' AND buecher.kategorie = kategorien.id", $filter);
-                break;
-            case '2':
-                $query .= sprintf(" AND buecher.verkauft = '%s'", $filter);
-                break;
-            case '3':
-                $query .= sprintf(" AND buecher.zustand = '%s'", $filter);
-                break;
-            default:
-                break;
-        }
+      case '1':
+        $query .= sprintf(" AND kategorien.kategorie = '%s' AND buecher.kategorie = kategorien.id", $filter);
+        break;
+      case '2':
+        $query .= sprintf(" AND buecher.verkauft = '%s'", $filter);
+        break;
+      case '3':
+        $query .= sprintf(" AND buecher.zustand = '%s'", $filter);
+        break;
+      default:
+        break;
     }
-    $query .= sprintf(" ORDER BY %s LIMIT %d, %d", $sortBy, $pageNumber * $booksPerPage, $booksPerPage);
+  }
+  $query .= sprintf(" ORDER BY %s LIMIT %d, %d", $sortBy, $pageNumber * $booksPerPage, $booksPerPage);
 
-    $result = $conn->query($query);
-    return $result->fetch_all();
+  $result = $conn->query($query);
+  return $result->fetch_all();
 }
