@@ -1,6 +1,7 @@
 * {
   color: white;
   text-decoration: none;
+  font-family: monospace;
 }
 
 html {
@@ -116,8 +117,11 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 5vh;
   overflow: none;
+}
+
+.book_content img {
+  margin-top: 5vh;
 }
 
 .book_imageframe {
@@ -127,7 +131,7 @@ p {
 .book_textfield {
   margin-left: 1vw;
   width: 60%;
-  font-size: 1rem;
+  font-size: 1.8rem;
 }
 
 .book_price {
@@ -184,8 +188,13 @@ p {
   justify-content: center;
 }
 
-.login_title {
 
+
+
+
+.login_title h3 {
+  font-family: monospace;
+  font-size: 4rem;
 }
 
 .mail .password {
@@ -203,6 +212,7 @@ p {
   padding: 0;
   width:100%;
   height: 100%;
+  justify-content: space-between;
 }
 
 .search_gradient_border::before {
@@ -217,6 +227,7 @@ p {
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
   pointer-events: none;
+  
 }
 
 .search_container {
@@ -311,7 +322,7 @@ p {
 .book_search_container {
   display: flex;
   width: 20%;
-  margin: 0 1vw;
+  margin: 0 3vw;
   height: 50vh;
   background: #101123;
   border-radius: 1vw;
@@ -324,10 +335,11 @@ p {
 }
 
 .price {
-  margin-top: 1vh;
+  margin: 1vh 0 1vh 0;
   align-items: baseline;
   justify-content: flex-end;
   padding-right: 1vw;
+  justify-self: flex-end;
 }
 
 .price_amount p {
@@ -336,6 +348,10 @@ p {
             background: -webkit-linear-gradient( #00FFFF, #8080E1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+}
+
+.price_tag p {
+  margin: 0;
 }
 
 /* ------------------------------------------- admin -------------------------------------------------*/ 
