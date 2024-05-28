@@ -90,7 +90,7 @@ foreach ($result->fetch_all() as $row) {
             <button class="searchbutton" type="submit">
               <img src="../assets/search.svg" alt="search icon" width="32" height="32">
             </button>
-            <input class="searchfield" type="text" placeholder="search..." name="search" />
+            <input class="searchfield" type="text" placeholder="search..." name="search" maxlength="250"/>
         </form>
     </div>
 
