@@ -168,10 +168,6 @@ if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
   <h1>list stuff</h1>
 
   <?php
-  $result = $conn->execute_query("SELECT * FROM buecher");
-  foreach ($result->fetch_all() as $row) {
-    echo $row[0] . "<br>";
-  }
 
 	include "../components/footer.php";
 
