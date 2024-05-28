@@ -6,7 +6,7 @@ function connectToDb(): mysqli
 {
     $servername = "172.17.0.1";
     $username = "root";
-    $password = "";
+    $password = "root";
     $database = "book";
 
 

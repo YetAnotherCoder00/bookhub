@@ -164,25 +164,26 @@ foreach ($result->fetch_all() as $row) {
     foreach ($rows as $value) {
         echo sprintf("
         <div class='book_search_container'>
+          <a href=''>
           <div class='search_gradient_border'>
-            <div class='book_content' id='image'>
+            <div class='book_content' >
               <img src='../assets/cover%d.jpg' class='search_book_image' alt='generic book cover'>
             </div>
-            <div class='book_content' id='name'>
+            <div class='book_content' >
               <a href='../books?id=%d' class='book_textfield'>%d: %s</a> 
             </div>
-            <div class='book_content price' id='price'>
+            <div class='book_content price' > 
               <div class='price_tag'>
                 <p>CHF</p>
               </div>
               <div class='price_amount'>
-                .................
+               <p>%.2f</p> 
               </div>  
             </div>
           </div>
+          </a>
         </div>
-        ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex],
-        $value[$idIndex], $value[$idIndex]);
+        ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex], number_format(floatval($value[$priceIndex]) / 100, 2));
     }
 
 //    <a href='../admin/update.php?id=%d' class='book_textfield'>update</a>         // update button
@@ -209,6 +210,10 @@ foreach ($result->fetch_all() as $row) {
         }
     }
 
+    
+  ?>
+  </div>
+  <?php
     // echo "<a href='?page=" . $i . $linkBuilder . "'> " . ($i + 1) . " </a>";
     echo "</div>";
 
@@ -242,7 +247,6 @@ foreach ($result->fetch_all() as $row) {
     }
 
     ?>
-  </div>
   </div>
 	<?php include "../components/footer.php"; ?>
 </body>

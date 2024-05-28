@@ -1,5 +1,6 @@
 * {
   color: white;
+  text-decoration: none;
 }
 
 html {
@@ -23,6 +24,8 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+
 
 /* --------------------------------------Home---------------------------------------- */
 
@@ -96,6 +99,7 @@ p {
   mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
+  pointer-events: none;
 }
 
 .book_container {
@@ -123,6 +127,7 @@ p {
 .book_textfield {
   margin-left: 1vw;
   width: 60%;
+  font-size: 1rem;
 }
 
 .book_price {
@@ -204,6 +209,7 @@ p {
   mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
+  pointer-events: none;
 }
 
 .search_container {
@@ -301,6 +307,7 @@ p {
   margin: 0 1vw;
   height: 50vh;
   background: #101123;
+  border-radius: 1vw;
 }
 
 .search_book_image{
@@ -311,4 +318,15 @@ p {
 
 .price {
   margin-top: 1vh;
+  align-items: baseline;
+  justify-content: flex-end;
+  padding-right: 1vw;
+}
+
+.price_amount p {
+            margin: 0 0 0 0.5vw;
+            font-size: 3rem;
+            background: -webkit-linear-gradient( #00FFFF, #8080E1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
 }
