@@ -12,6 +12,7 @@ $sortBy = "id";
 
 $idIndex = 0;
 $kurzTitleIndex = 1;
+$priceIndex = 2;
 
 $sortByColumns = ["id", "kurztitle", "autor"];
 $filterColumns = ["kategorie", "verkauft", "zustand"];

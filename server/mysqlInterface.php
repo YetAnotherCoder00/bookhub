@@ -4,9 +4,9 @@ session_start();
 
 function connectToDb(): mysqli
 {
-    $servername = "mariadb";
+    $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "";
     $database = "book";
 
 
@@ -81,7 +81,7 @@ function getResult(string $search, string $sortBy, int $pageNumber, string $filt
     $booksPerPage = 18;
     $conn = connectToDb();
 
-    $query = sprintf("SELECT distinct buecher.id, kurztitle FROM book.buecher, book.kategorien
+    $query = sprintf("SELECT distinct buecher.id, kurztitle, buecher.price FROM book.buecher, book.kategorien
         WHERE kurztitle LIKE '%%%s%%'", $search);
 
     if ($filter != "")
