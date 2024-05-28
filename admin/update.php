@@ -66,7 +66,7 @@ if (isset($_POST["update"])) {
 	$zustand = htmlspecialchars(trim($_POST["zustand"]));
 	$price = intval($_POST["price"]);
 
-	$verkauft = isset($_POST["verkauft"]);
+	$verkauft = isset($_POST["verkauft"]) ? 1 : 0;
 
   $query = sprintf(
 		"UPDATE buecher 
@@ -78,9 +78,9 @@ if (isset($_POST["update"])) {
 
   $result = $conn->query($query);
 
-	$result = $conn->query(sprintf("SELECT * FROM buecher WHERE id = '%d'", $id));
+  $result = $conn->query(sprintf("SELECT * FROM buecher WHERE id = '%d'", $id));
 
-	$book = $result->fetch_row();
+  $book = $result->fetch_row();
   echo "<meta http-equiv='refresh' content='0; URL=\"../search\"; '/>";
 }
 else {
