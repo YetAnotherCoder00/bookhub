@@ -85,23 +85,25 @@ foreach ($result->fetch_all() as $row) {
 <?php
 
 foreach ($bookData as $book) {
-    echo "
-    <div class='book_container'>
-    <a href='books?id=". $book[$idIndex] . "'>
-        <div class='book_content'>
-            <div class='book_imageframe'>
-                <img src='../assets/cover" . rand(1, 5) . ".jpg' class=book_image>
-            </div>
-            <div class='book_textfield'>
-                <h2>" . $book[$kurzTitleIndex] . "</h2>
-                <p>" . $book[$titleIndex] . "</p>
-                <br><br><br><br><br><br>
-                <h1 class='book_price'>" . number_format(floatval($book[$priceIndex]) / 100, 2) . "</h1>
-            </div>
-        </div>
-    </a>
+  echo "
+    <div class='gradient_border'>
+      <div class='book_container'>
+      <a href='books?id=". $book[$idIndex] . "'>
+          <div class='book_content'>
+              <div class='book_imageframe'>
+                  <img src='../assets/cover" . rand(1, 5) . ".jpg' class=book_image>
+              </div>
+              <div class='book_textfield'>
+                  <h2>" . $book[$kurzTitleIndex] . "</h2>
+                  <p>" . $book[$titleIndex] . "</p>
+                  <br><br><br><br><br><br>
+                  <h1 class='book_price'>" . number_format(floatval($book[$priceIndex]) / 100, 2) . "</h1>
+              </div>
+          </div>
+      </a>
+      </div>
     </div>
-        ";
+  ";
 
 }
 

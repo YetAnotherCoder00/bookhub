@@ -162,19 +162,32 @@ foreach ($result->fetch_all() as $row) {
     // print book results, clean this mess up
     foreach ($rows as $value) {
         echo sprintf("
-        <div class='book_container book_search_container'>
-            <div class='book_content'>
-                <img src='../assets/cover%d.jpg' class='book_image' alt='generic book cover'>
-                <a href='../books?id=%d' class='book_textfield'>%d: %s</a> 
+        <div class='book_search_container'>
+          <div class='search_gradient_border'>
+            <div class='book_content' id='image'>
+              <img src='../assets/cover%d.jpg' class='search_book_image' alt='generic book cover'>
             </div>
-            <div class='book_content'>
-            <a href='../admin/update.php?id=%d' class='book_textfield'>update</a>
-            <a href='../admin/delete.php?id=%d' class='book_textfield'>delete</a>
+            <div class='book_content' id='name'>
+              <a href='../books?id=%d' class='book_textfield'>%d: %s</a> 
             </div>
+            <div class='book_content price' id='price'>
+              <div class='price_tag'>
+                <p>CHF</p>
+              </div>
+              <div class='price_amount'>
+                .................
+              </div>  
+            </div>
+          </div>
         </div>
         ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex],
         $value[$idIndex], $value[$idIndex]);
     }
+
+//    <a href='../admin/update.php?id=%d' class='book_textfield'>update</a>         // update button
+//    <a href='../admin/delete.php?id=%d' class='book_textfield'>delete</a>         // delete button
+
+
 
     // todo: make pagination simpler
     $tmp = [];

@@ -21,6 +21,7 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 
 /* --------------------------------------Home---------------------------------------- */
@@ -76,16 +77,32 @@ p {
 
 /* -------------------------------------Books---------------------------------------- */
 
+.gradient_border{
+  display: flex;
+  position: relative;
+  padding: 0;
+  margin: 2%;
+  max-width:50%;
+}
+
+.gradient_border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2vw;
+  border: 5px solid transparent;
+  background: linear-gradient(140deg, #00FFFF, #8080E1) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
 .book_container {
-  width: 50%;
+  width: inherit;
   display: flex;
   align-items: center;
-  margin: 5vw auto;
   flex-direction: column;
-  border: solid 0.1vw;
-  border-image-slice: 1;
-  border-image-source: linear-gradient(to left, red, green);
-  border-radius: 2vw;
   padding: 1vw;
 }
 
@@ -96,6 +113,9 @@ p {
 .book_content {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  margin-top: 5vh;
+  overflow: none;
 }
 
 .book_imageframe {
@@ -142,6 +162,28 @@ p {
 
 /* --------------------------------------Search--------------------------------------- */
 
+.search_gradient_border {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0;
+  margin: 2%;
+  width:100%;
+  height: 100%;
+}
+
+.search_gradient_border::before {
+    content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1vw;
+  border: 3px solid transparent;
+  background: linear-gradient(140deg, #00FFFF, #8080E1) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
 
 .search_container {
   width: 70%;
@@ -202,7 +244,7 @@ p {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 5vh 20vh;
+  margin: 5vh 10vw;
   gap: 4vh 2vh;
 }
 
@@ -233,6 +275,18 @@ p {
 }
 
 .book_search_container {
+  display: flex;
   width: 20%;
-  margin: 0;
+  margin: 0 1vw;
+  height: 50vh;
+}
+
+.search_book_image{
+  border-radius: 1vw;
+  width: 10vw;
+  height: 27vh;
+}
+
+.price {
+  margin-top: 1vh;
 }
