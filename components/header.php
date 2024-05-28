@@ -73,18 +73,18 @@
 
     <div class="menu">
       <?php
-      if (isset($_SESSION["loggedIn"]) and $_SESSION["loggedIn"]) {
+      if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] && isset($_SESSION["admin"]) && $_SESSION["admin"]) {
         echo '<a href="../admin"> <img src="../assets/admin.svg" alt="admin panel" width="32" height="32"> </a>';
       }
       ?>
       <a href="/"> <img src="../assets/home.svg" alt="home icon" width="32" height="32"> </a>
       <a href="/search"> <img src="../assets/search.svg" alt="search icon" width="32" height="32"> </a>
       <?php
-      if (isset($_SESSION["loggedIn"]) and $_SESSION["loggedIn"]) {
+      if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"]) {
         echo '<a href="../logout"> <img src="../assets/logout.svg" alt="logout icon" width="32" height="32"> </a>';
       }
       else {
-				echo '<a href="../login"> <img src="../assets/login.svg" alt="login icon" width="32" height="32"> </a>';
+        echo '<a href="../login"> <img src="../assets/login.svg" alt="login icon" width="32" height="32"> </a>';
       }
       ?>
     </div>
