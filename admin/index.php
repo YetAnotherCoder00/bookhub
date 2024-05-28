@@ -88,6 +88,18 @@ if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
 
       echo "continuing";
 
+			$query = sprintf(
+				"INSERT INTO buecher (
+				    katalog, nummer, kurztitle, kategorie, verkauft, kaufer, autor, title, sprache, foto, verfasser, zustand, price
+				) VALUES (
+				    %d, %d, %s, %d, %d, %d, %s, %s, %s, %s, %d, %s, %d
+				)",
+        $katalog, $nummer, $kurztitle, $kategorie, $verkauft, $kaufer, $autor, $title, $sprache, $foto, $verfasser,
+        $zustand, $price
+			);
+
+			$result = $conn->query($query);
+
   //    $preparedQuery = $conn->prepare("INSERT INTO buecher (katalog, nummer, kurztitle, kategorie, kaufer, autor, title, sprache, verfasser, zustand, price)");
 
     }
@@ -122,7 +134,7 @@ if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
   You can create something here
 
   create customer!
-  <form action="create.php" method="post">
+  <form action="index.php" method="post">
     <!--  <input type="checkbox" hidden="hidden" checked="checked" name="creating" value="user">-->
     <input type="text" name="name" placeholder="name" required="required">
     <input type="text" name="vorname" placeholder="vorname" required="required">
@@ -140,7 +152,7 @@ if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
 
 
   create book!
-  <form action="create.php" method="post">
+  <form action="index.php" method="post">
     <!--  <input type="checkbox" hidden="hidden" checked="checked" value="book">-->
     <input type="number" name="katalog" placeholder="katalog" required="required">
     <input type="number" name="nummer" placeholder="nummer" required="required">
@@ -159,7 +171,7 @@ if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
     <button type="submit" name="create" value="book">submit the fleshy nature of the book</button>
   </form>
 
-  <form enctype="multipart/form-data" action="create.php" method="post">
+  <form enctype="multipart/form-data" action="index.php" method="post">
     <input type="hidden" name="MAX_FILE_SIZE" value="30000">
     <input type="file" name="userImage" style="color: white">
     <button type="submit" name="create" value="image">submit a fleshy image</button>
@@ -168,10 +180,6 @@ if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
   <h1>list stuff</h1>
 
   <?php
-  $result = $conn->execute_query("SELECT * FROM buecher");
-  foreach ($result->fetch_all() as $row) {
-    echo $row[0] . "<br>";
-  }
 
 	include "../components/footer.php";
 

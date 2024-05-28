@@ -4,13 +4,13 @@ include "../server/mysqlInterface.php";
 $conn = connectToDb();
 
 if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== true || (isset($_GET["delete"]) && $_GET["delete"] === "0")) {
-    header("Location: ../index.php");
+    header("Location: ../search");
     die();
 }
 
 if (isset($_GET["delete"]) && $_GET["delete"] === "1") {
     $conn->query("DELETE FROM buecher WHERE id = " . $_GET["id"]);
-    header("Location: ../index.php");
+    header("Location: ../search");
     die();
 }
 

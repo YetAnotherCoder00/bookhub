@@ -47,18 +47,20 @@ if (isset($_SESSION["username"]) && isset($_SESSION["loggedIn"]) && $_SESSION["l
       <?php include "../components/header.php" ?>
         
         <div class="content">
-          <div class="login_panel">
-            <div class="login_title">
-              <h3>LogIn</h3>
-            </div>
-            <div class="login_form">
-            <form method="POST" action="./index.php">
-              <div>
-                <input class="mail" name="username" type="text" placeholder="E-Mail"><br>
-                <input class="password" name="password" type="password" placeholder="Password">
+          <div class="login_gradient_border">
+            <div class="login_panel">
+              <div class="login_title">
+                <h3>LogIn</h3>
               </div>
-              <button type="submit">Submit the Flesh</button>
-            </form>
+              <div class="login_form">
+              <form method="POST" action="./index.php">
+                <div>
+                  <input class="mail" name="username" type="text" placeholder="E-Mail"><br>
+                  <input class="password" name="password" type="password" placeholder="Password">
+                </div>
+                <button type="submit">Submit the Flesh</button>
+              </form>
+              </div>
             </div>
           </div>
         </div>
