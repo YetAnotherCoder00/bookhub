@@ -162,6 +162,11 @@ foreach ($result->fetch_all() as $row) {
 
     // print book results, clean this mess up
     foreach ($rows as $value) {
+        $kurzTitle = $value[$kurzTitleIndex];
+        if (strlen($kurzTitle) > 20) {
+          $kurzTitle = substr($kurzTitle, 0, 20);
+          $kurzTitle .= "...";
+        }
         echo sprintf("
         <div class='book_search_container'>
           <a href=''>
@@ -183,7 +188,7 @@ foreach ($result->fetch_all() as $row) {
           </div>
           </a>
         </div>
-        ", rand(1, 5), $value[$idIndex], $value[$idIndex], $value[$kurzTitleIndex], number_format(floatval($value[$priceIndex]) / 100, 2));
+        ", rand(1, 5), $value[$idIndex], $value[$idIndex], $kurzTitle, number_format(floatval($value[$priceIndex]) / 100, 2));
     }
 
 //    <a href='../admin/update.php?id=%d' class='book_textfield'>update</a>         // update button
@@ -213,6 +218,7 @@ foreach ($result->fetch_all() as $row) {
     
   ?>
   </div>
+  <div>
   <?php
     // echo "<a href='?page=" . $i . $linkBuilder . "'> " . ($i + 1) . " </a>";
     echo "</div>";
@@ -247,6 +253,7 @@ foreach ($result->fetch_all() as $row) {
     }
 
     ?>
+  </div>
   </div>
 	<?php include "../components/footer.php"; ?>
 </body>
