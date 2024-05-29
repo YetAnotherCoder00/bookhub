@@ -11,7 +11,13 @@ $kundenColumns = ["kid" => 0, "geburtstag" => 1, "vorname" => 2, "name" => 3, "g
 $conn = connectToDb();
 
 $result = $conn->query("SELECT * FROM kunden");
-
+?>
+<html>
+  <header>
+    <link rel="stylesheet" href="../../index.css">
+  </header>
+  <body>
+<?php
 printf("<h1>Kunden: </h1>");
 printf("<table>");
 foreach ($result->fetch_all() as $row) {
@@ -24,3 +30,6 @@ foreach ($result->fetch_all() as $row) {
 	printf("</tr>");
 }
 printf("</table>");
+?>
+</body>
+</html>
