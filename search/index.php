@@ -185,14 +185,19 @@ foreach ($result->fetch_all() as $row) {
                <p>%.2f</p> 
               </div>  
             </div>
+            <div class='hlep'>
+              <a href='../admin/update.php?id=%d' class='book_textfield'>update</a>
+              <a href='../admin/delete.php?id=%d' class='book_textfield'>delete</a>
+            </div>
           </div>
           </a>
         </div>
-        ", rand(1, 5), $value[$idIndex], $value[$idIndex], $kurzTitle, number_format(floatval($value[$priceIndex]) / 100, 2));
+        ", rand(1, 5), $value[$idIndex], $value[$idIndex], $kurzTitle, number_format(floatval($value[$priceIndex]) / 100, 2),
+        $value[$idIndex], $value[$idIndex]);
     }
 
-//    <a href='../admin/update.php?id=%d' class='book_textfield'>update</a>         // update button
-//    <a href='../admin/delete.php?id=%d' class='book_textfield'>delete</a>         // delete button
+//             // update button
+//             // delete button
 
 
 
