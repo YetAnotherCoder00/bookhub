@@ -30,9 +30,7 @@ else if (isset($_POST["id"])) {
 
 <?php include "../components/header.php"; ?>
 
-<h1>
-    create stuff
-</h1>
+
 <?php
 
 
@@ -93,39 +91,48 @@ $result = $conn->query(sprintf("SELECT * FROM buecher WHERE id = '%d'", $id));
 $book = $result->fetch_row();
 
 ?>
-<br>
-update book!
-<form action="update.php" method="post">
-    <!--  <input type="checkbox" hidden="hidden" checked="checked" value="book">-->
-    <input type="hidden" name="foto" value="image.png">
-    <input type="hidden" name="id" value="<?= $_GET["id"] ?>">
+<div class="content">
+  <div class="book_update_gradient_border">
+    <div class="book_update_container">
+      <h3>Update Book</h3>
+      <form action="update.php" method="post">
+          <!--  <input type="checkbox" hidden="hidden" checked="checked" value="book">-->
+        <div class="book_update_inputs">
+          <input type="hidden" name="foto" value="image.png">
+          <input type="hidden" name="id" value="<?= $_GET["id"] ?>">
 
-    <input type="number" name="katalog" placeholder="katalog" required="required" value="<?= $book[$columns["katalog"]] ?>">
-    <input type="number" name="nummer" placeholder="nummer" required="required" value="<?= $book[$columns["nummer"]] ?>">
-    <input type="text" name="kurztitle" placeholder="kurztitle" required="required" value="<?= $book[$columns["kurztitle"]] ?>">
-    <input type="number" name="kategorie" placeholder="kategorie" required="required" value="<?= $book[$columns["kategorie"]] ?>">
-    <input type="checkbox" name="verkauft" placeholder="verkauft" value="1" <?php if($book[$columns["verkauft"]]) {
-      echo "checked='checked'";
-		}?>>
-    <input type="number" name="kaufer" placeholder="kaufer" required="required" value="<?= $book[$columns["kaufer"]] ?>">
-    <input type="text" name="autor" placeholder="autor" required="required" value="<?= $book[$columns["autor"]] ?>">
-    <input type="text" name="title" placeholder="title" required="required" value="<?= $book[$columns["title"]] ?>">
-    <input type="text" name="sprache" placeholder="sprache" required="required" value="<?= $book[$columns["sprache"]] ?>">
-<!--    <input type="file" name="foto" placeholder="foto" required="required" style="color: white" value="--><?php //= $book[$columns["foto"]] ?><!--">-->
-    <input type="number" name="verfasser" placeholder="verfasser" required="required" value="<?= $book[$columns["verfasser"]] ?>">
-    <input type="text" name="zustand" placeholder="zustand" required="required" value="<?= $book[$columns["zustand"]] ?>">
-    <input type="number" name="price" placeholder="price" required="required" value="<?= $book[$columns["price"]] ?>">
-
-    <button type="submit" name="update" value="book">submit the fleshy nature of the book</button>
-</form>
+          <input type="number" name="katalog" placeholder="katalog" required="required" value="<?= $book[$columns["katalog"]] ?>">
+          <input type="number" name="nummer" placeholder="nummer" required="required" value="<?= $book[$columns["nummer"]] ?>">
+          <input type="text" name="kurztitle" placeholder="kurztitle" required="required" value="<?= $book[$columns["kurztitle"]] ?>">
+          <input type="number" name="kategorie" placeholder="kategorie" required="required" value="<?= $book[$columns["kategorie"]] ?>">
+          <div class="update_verkauft_container">
+            <label class="update_verkauft_label" for="update_verkauft">verkauft:</label>
+            <input type="checkbox" id="update_verkauft" name="verkauft" placeholder="verkauft" value="1" <?php if($book[$columns["verkauft"]]) {
+            echo "checked='checked'";
+            }?>>
+          </div>
+          <input type="number" name="kaufer" placeholder="kaufer" required="required" value="<?= $book[$columns["kaufer"]] ?>">
+          <input type="text" name="autor" placeholder="autor" required="required" value="<?= $book[$columns["autor"]] ?>">
+          <input type="text" name="title" placeholder="title" required="required" value="<?= $book[$columns["title"]] ?>">
+          <input type="text" name="sprache" placeholder="sprache" required="required" value="<?= $book[$columns["sprache"]] ?>">
+      <!--    <input type="file" name="foto" placeholder="foto" required="required" style="color: white" value="--><?php //= $book[$columns["foto"]] ?><!--">-->
+          <input type="number" name="verfasser" placeholder="verfasser" required="required" value="<?= $book[$columns["verfasser"]] ?>">
+          <input type="text" name="zustand" placeholder="zustand" required="required" value="<?= $book[$columns["zustand"]] ?>">
+          <input type="number" name="price" placeholder="price" required="required" value="<?= $book[$columns["price"]] ?>">
+        </div>
+        <div class="book_update_submit_container">
+          <button type="submit" class="book_update_submit" name="update" value="book">submit the fleshy nature of the book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!--<form enctype="multipart/form-data" action="create.php" method="post">-->
 <!--    <input type="hidden" name="MAX_FILE_SIZE" value="30000">-->
 <!--    <input type="file" name="userImage" style="color: white">-->
 <!--    <button type="submit" name="create" value="image">submit a fleshy image</button>-->
 <!--</form>-->
-
-<h1>list stuff</h1>
 
 <?php
 }
