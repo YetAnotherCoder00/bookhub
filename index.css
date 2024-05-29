@@ -538,8 +538,70 @@ p {
 }
 
 
+/*--------------------------------------register-----------------------------------*/ 
 
+.register_gradient_border {
+  display: flex;
+  position: relative;
+  padding: 0;
+  width: 65vw;
+  height: 65vh;
+}
 
+.register_gradient_border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5vw;
+  border: 2px solid transparent;
+  background: linear-gradient(140deg, #00FFFF, #8080E1) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+}
 
+.register_container {
+  width:100%;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.register_title {
+  font-size: 4rem;
+}
 
+.register_inputs {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+}
+
+.register_container input {
+  margin-top: 1vw;
+  font-size: 2rem;
+  color: #878787 ;
+}
+
+.verify_admin_container {
+  border: 0.1vw solid #878787 ;
+  border-radius: 0.25vw;
+  padding-left: 0.25vw;
+  margin-top: 1vh;
+  display: flex;
+  align-items: baseline;
+}
+
+.register_label {
+  color: #878787 ;
+  font-size: 2rem;
+}
+
+.register_submit {
+  margin-top: 1vh;
+  font-size: 2rem;
+  color: #878787 ;
+}

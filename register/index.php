@@ -33,16 +33,38 @@ if (isset($_POST["submit"])) {
 <html lang="de">
 <head>
   <title>register</title>
+  <link rel="stylesheet" href="../index.css"> 
 </head>
 <body>
-  <form action="index.php" method="post">
-    <input type="text" name="username" required="required" placeholder="username" maxlength="45">
-    <input type="password" name="password" required="required" placeholder="password" minlength="8">
-    <input type="text" name="name" required="required" placeholder="name" maxlength="100">
-    <input type="text" name="vorname" required="required" placeholder="vorname" maxlength="100">
-    admin?:
-    <input type="checkbox" name="admin" value="1">
-    <button type="submit" name="submit" value="flesh" >submit</button>
-  </form>
+  <?php 
+  include "../components/header.php";
+  ?>
+  <div class="content">
+    <div class="register_gradient_border">
+      <div class="register_container">
+        <div class="register_title">
+          <h3>Register</h3>
+        </div>
+        <form action="index.php" method="post">
+          <div class="register_inputs">
+            <input type="text" name="username" required="required" placeholder="username" maxlength="45">
+            <input type="password" name="password" required="required" placeholder="password" minlength="8">
+            <input type="text" name="name" required="required" placeholder="name" maxlength="100">
+            <input type="text" name="vorname" required="required" placeholder="vorname" maxlength="100">
+            <div class="verify_admin_container">
+              <label for="verify_admin" class="register_label">admin?:</label>
+              <input type="checkbox" id="verify_admin" name="admin" value="1">
+            </div>
+          </div>
+          <div class="register_submit_container">
+            <button type="submit" class="register_submit" name="submit" value="flesh" >submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <?php
+  include "../components/footer.php";
+  ?>
 </body>
 </html>
