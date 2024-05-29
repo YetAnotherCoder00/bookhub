@@ -180,12 +180,12 @@ p {
 }
 
 .book_price_tag {
-  font-size: 3rem;
+  font-size: 2rem;
   color: #878787;
 }
 
 .book_price_amount {
-  font-size: 5rem;
+  font-size: 4rem;
   background: -webkit-linear-gradient( #00FFFF, #8080E1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -243,13 +243,8 @@ p {
   justify-content: center;
 }
 
-.login_form {
-  display: flex;
-  flex-direction: column;
-  width: 40vw;
-  height: 40vh;
-  justify-content: center;
-}
+
+
 
 
 .login_title h3 {
@@ -257,36 +252,11 @@ p {
   font-size: 4rem;
 }
 
-.login_inputs {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: right;
-  height: 10vw
+.mail .password {
+
 }
 
-.login_inputfield {
-  border: none;
-  width: 80%;
-  background-color: transparent !important;
-  border-bottom: 2px solid #878787 ;  
-}
 
-.login_button {
-  margin-right: 1vw;
-  color: #878787  ;
-}
-
-.register_link {
-  color: #878787  ;
-}
-
-.login_submit_container{
-  display: flex;
-  justify-content: center;
-  margin-top: 5vh;
-  align-items: baseline;
-}
 
 /* --------------------------------------Search--------------------------------------- */
 
@@ -447,16 +417,6 @@ p {
   padding:1vw;
   background: #101123;
   border-radius: 0.5vw;
-  justify-content: center;
-}
-
-.admin_functions {
-  display: flex;
-  width: 80vw; 
-}
-
-.admin_title {
-  color: #878787 ;
 }
 
 .create_gradient_border {
@@ -483,22 +443,7 @@ p {
   pointer-events: none;
 }
 
-.form_container{
-  display: flex;
-  flex-direction: column;
-}
 
-.form_container input {
-  margin-top: 1vh;
-}
-
-.admin_submit {
-  margin-top: 1vh;
-}
-
-.admin_label {
-  color: #878787 ;
-}
 
 
 

@@ -67,11 +67,9 @@ if (isset($_SESSION["username"]) && isset($_SESSION["loggedIn"]) && $_SESSION["l
                     <input id="password" class="login_inputfield" name="password" type="password" placeholder="Password">
                   </div> 
                 </div>
-                <div class="login_submit_container">
-                  <button type="submit" class="login_button">Submit the Flesh</button>
-                  <a href="../register" class="register_link">register</a>
-                </div>
+                <button type="submit" class="login_button">Submit the Flesh</button>
               </form>
+                  <a href="../register">register</a>
               </div>
             </div>
           </div>

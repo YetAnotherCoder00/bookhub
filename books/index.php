@@ -33,22 +33,30 @@ $bookInfo = $result->fetch_row();
   <?php include "../components/header.php"; ?>
 
     <div class="content">
-      <div class="book_container">
-        <div class="book_content">
+      <div class="book_gradient_border">
+        <div class="book_container books_book_container">
+          <div class="book_content">
 
-          <div class="book_imageframe">
-            <img src="../assets/cover<?= rand(1, 5)?>.jpg" class=book_image>
-          </div>
+            <div class="book_imageframe">
+              <img src="../assets/cover<?= rand(1, 5)?>.jpg" class="book_image books_book_image">
+            </div>
 
-          <div class="book_textfield">
-            <h2><?= $bookInfo[1] ?></h2>
-              <p>Autor: <?= $bookInfo[4] ?></p>
-              <p>Kategorie: <?= $bookInfo[5] ?></p>
-              <p>Zustand: <?= $bookInfo[3] ?></p>
-              <p>Verkauft: <?= $bookInfo[0] ?></p>
-            <p><?= $bookInfo[2] ?> </p>
-              <br><br><br><br><br><br>
-            <h1 class="book_price"><?= number_format(floatval($bookInfo[6]) / 100, 2) ?></h1>
+            <div class="book_textfield">
+              <div class="book_content book_infos">
+                <h2><?= $bookInfo[1] ?></h2>
+                  <p>Autor: <?= $bookInfo[4] ?></p>
+                  <p>Kategorie: <?= $bookInfo[5] ?></p>
+                  <p>Zustand: <?= $bookInfo[3] ?></p>
+                  <p>Verkauft: <?= $bookInfo[0] ?></p>
+              </div>
+              <div class="book_content book_text">
+                <p><?= $bookInfo[2] ?> </p>
+              </div>
+              <div class="book_content book_price" >
+                <p class="book_price_tag">CHF</p>
+                <p class="book_price_amount"><?= number_format(floatval($bookInfo[6]) / 100, 2) ?></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

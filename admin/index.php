@@ -130,46 +130,59 @@ if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
 
 <div class="content">
 
-  <div class="create_gradient_border">
-    <div class="create_container">
-      <form action="index.php" method="post" class="create_customer_form">
-        <!--  <input type="checkbox" hidden="hidden" checked="checked" name="creating" value="user">-->
-        <input type="text" name="name" placeholder="name" required="required">
-        <input type="text" name="vorname" placeholder="vorname" required="required">
-        <input type="password" name="password" placeholder="password" required="required">
-        <input type="email" name="email" placeholder="email" required="required">
-        <input type="date" name="geburtstag" placeholder="geburtstag" required="required">
-        M:
-        <input type="radio" name="geschlecht" value="M">
-        F:
-        <input type="radio" name="geschlecht" value="F">
-        kontakt per email:
-        <input type="checkbox" name="kontaktperemail" placeholder="kontaktperemail">
-        <button type="submit" name="create" value="user">submit the flesh of the user</button>
-      </form>
-    </div>
-  </div>
+  <div class="admin_functions">
 
-  <div class="create_gradient_border">
-    <div class="create_container">
-      <form action="index.php" method="post" class="create_book_form">
-        <!--  <input type="checkbox" hidden="hidden" checked="checked" value="book">-->
-        <input type="number" name="katalog" placeholder="katalog" required="required">
-        <input type="number" name="nummer" placeholder="nummer" required="required">
-        <input type="text" name="kurztitle" placeholder="kurztitle" required="required">
-        <input type="number" name="kategorie" placeholder="kategorie" required="required">
-        <input type="checkbox" name="verkauft" placeholder="verkauft">verkauft
-        <input type="number" name="kaufer" placeholder="kaufer" required="required">
-        <input type="text" name="autor" placeholder="autor" required="required">
-        <input type="text" name="title" placeholder="title" required="required">
-        <input type="text" name="sprache" placeholder="sprache" required="required">
-        <input type="file" name="foto" placeholder="foto" required="required" style="color: white">
-        <input type="number" name="verfasser" placeholder="verfasser" required="required">
-        <input type="text" name="zustand" placeholder="zustand" required="required">
-        <input type="number" name="price" placeholder="price" required="required">
-        <button type="submit" name="create" value="book">submit the fleshy nature of the book</button>
-      </form>
+    <div class="create_gradient_border">
+      <div class="create_container">
+        <form action="index.php" method="post" class="create_book_form">
+          <!--  <input type="checkbox" hidden="hidden" checked="checked" value="book">-->
+          <div class="form_container">
+          <h1 class="admin_title">Buch erstellen</h1>
+          <input type="number" name="katalog" placeholder="katalog" required="required">
+          <input type="number" name="nummer" placeholder="nummer" required="required">
+          <input type="text" name="kurztitle" placeholder="kurztitle" required="required">
+          <input type="number" name="kategorie" placeholder="kategorie" required="required">
+          <div>
+            <input type="checkbox" id="verkauft" name="verkauft" placeholder="verkauft">
+            <label class="admin_label" for="verkauft">verkauft</label>
+          </div>
+          <input type="number" name="kaufer" placeholder="kaufer" required="required">
+          <input type="text" name="autor" placeholder="autor" required="required">
+          <input type="text" name="title" placeholder="title" required="required">
+          <input type="text" name="sprache" placeholder="sprache" required="required">
+          <input type="file" name="foto" placeholder="foto" required="required" style="color: white">
+          <input type="number" name="verfasser" placeholder="verfasser" required="required">
+          <input type="text" name="zustand" placeholder="zustand" required="required">
+          <input type="number" name="price" placeholder="price" required="required">
+          <button type="submit" name="create" value="book" class="admin_submit">submit the fleshy nature of the book</button>
+          </div>
+        </form>
+      </div>
     </div>
+
+    <div class="create_gradient_border">
+      <div class="create_container">
+        <form action="index.php" method="post" class="create_customer_form">
+          <!--  <input type="checkbox" hidden="hidden" checked="checked" name="creating" value="user">-->
+          <div class="form_container">
+          <h1 class="admin_title">Benutzer erstellen</h1>
+          <input type="text" name="name" placeholder="name" required="required">
+          <input type="text" name="vorname" placeholder="vorname" required="required">
+          <input type="password" name="password" placeholder="password" required="required">
+          <input type="email" name="email" placeholder="email" required="required">
+          <input type="date" name="geburtstag" placeholder="geburtstag" required="required">
+          M:
+          <input type="radio" name="geschlecht" value="M">
+          F:
+          <input type="radio" name="geschlecht" value="F">
+          kontakt per email:
+          <input type="checkbox" name="kontaktperemail" placeholder="kontaktperemail">
+          <button type="submit" name="create" value="user" class="admin_submit">submit the flesh of the user</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
   </div>
 
 </div>
