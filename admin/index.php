@@ -142,15 +142,15 @@ if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
           <input type="number" name="nummer" placeholder="nummer" required="required">
           <input type="text" name="kurztitle" placeholder="kurztitle" required="required">
           <input type="number" name="kategorie" placeholder="kategorie" required="required">
-          <div>
-            <input type="checkbox" id="verkauft" name="verkauft" placeholder="verkauft">
+          <div class="admin_verkauft">
             <label class="admin_label" for="verkauft">verkauft</label>
+            <input type="checkbox" id="verkauft" name="verkauft" placeholder="verkauft">
           </div>
           <input type="number" name="kaufer" placeholder="kaufer" required="required">
           <input type="text" name="autor" placeholder="autor" required="required">
           <input type="text" name="title" placeholder="title" required="required">
           <input type="text" name="sprache" placeholder="sprache" required="required">
-          <input type="file" name="foto" placeholder="foto" required="required" style="color: white">
+          <input type="file" name="foto" placeholder="foto" required="required" style="color: #878787">
           <input type="number" name="verfasser" placeholder="verfasser" required="required">
           <input type="text" name="zustand" placeholder="zustand" required="required">
           <input type="number" name="price" placeholder="price" required="required">
@@ -170,13 +170,19 @@ if (!isset($_SESSION["username"]) || $_SESSION["username"] != "admin") {
           <input type="text" name="vorname" placeholder="vorname" required="required">
           <input type="password" name="password" placeholder="password" required="required">
           <input type="email" name="email" placeholder="email" required="required">
-          <input type="date" name="geburtstag" placeholder="geburtstag" required="required">
-          M:
-          <input type="radio" name="geschlecht" value="M">
-          F:
-          <input type="radio" name="geschlecht" value="F">
-          kontakt per email:
-          <input type="checkbox" name="kontaktperemail" placeholder="kontaktperemail">
+          <input type="date" name="geburtstag" placeholder="geburtstag" required="required" style="color: #878787">
+          <div class="admin_geschlecht">
+            <label class="admin_label" for="maennlich">M</label>
+            <input type="radio" id="maennlich" name="geschlecht" value="M">
+            <label class="admin_label" for="weiblich">F</label>
+            <input type="radio" id="weiblich" name="geschlecht" value="F">
+            <label class="admin_label" for="divers">D</label>
+            <input type="radio" id="divers" name="geschlecht" value="D">
+          </div>
+          <div class="admin_kontakt">
+            <label class="admin_label" for="kontakt">kontakt per email:</label>
+            <input type="checkbox" id="kontakt" name="kontaktperemail" placeholder="kontaktperemail">
+          </div>
           <button type="submit" name="create" value="user" class="admin_submit">submit the flesh of the user</button>
           </div>
         </form>
